@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  mvn:
+    build:
+      context: .
+      dockerfile: Dockerfile.mvn
+    volumes: 
+      - .:/opt/app
+      - $HOME/.m2:/root/.m2
+    working_dir: /opt/app

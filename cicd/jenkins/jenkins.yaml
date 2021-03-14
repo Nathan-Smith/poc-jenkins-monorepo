@@ -1,0 +1,21 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+jobs:
+  - script: >
+      multibranchPipelineJob('repo') {
+        branchSources {
+          git {
+            id = 'repo'
+            remote('/var/repo')
+          }
+        }
+      }
+security:
+  scriptApproval:
+    approvedSignatures:
+    - "method org.jgrapht.Graph addEdge java.lang.Object java.lang.Object"
+    - "method org.jgrapht.Graph addVertex java.lang.Object"
+    - "method org.jgrapht.Graph outgoingEdgesOf java.lang.Object"
+    - "method org.jgrapht.Graph removeVertex java.lang.Object"
+    - "method org.jgrapht.Graph vertexSet"
+    - "new org.jgrapht.graph.DefaultDirectedGraph java.lang.Class"

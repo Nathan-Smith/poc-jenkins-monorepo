@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  jenkins:
+    build:
+      context: ./cicd/jenkins
+    ports: 
+      - 8080:8080
+    volumes: 
+      - .jenkins:/var/jenkins_home
+      - .:/var/repo
+  groovy:
+    build:
+      context: .
+      dockerfile: Dockerfile.groovy
+    volumes: 
+      - .:/opt/app
+    working_dir: /opt/app

@@ -1,0 +1,5 @@
+blueocean:1.24.4
+configuration-as-code:1.47
+git:4.7.0
+job-dsl:1.77
+pipeline-utility-steps:2.6.1
