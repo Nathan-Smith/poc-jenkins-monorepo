@@ -45,13 +45,14 @@
 
 ## Running CI/CD Locally
 
-`$  docker-compose up jenkins`
+`$  docker-compose up`
 
-This will run on `http://localhost:8080`
+Jenkins will be available on `http://localhost:8080`
+Nexus will be available on `http://localhost:8081`
 
 ### Stopping CI/CD
 
-`$ docker-compose down jenkins`
+`$ docker-compose down`
 
 ## Components
 

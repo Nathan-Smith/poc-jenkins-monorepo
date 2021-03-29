@@ -8,3 +8,9 @@ services:
     volumes:
       - .jenkins:/var/jenkins_home
       - .:/var/repo
+  nexus:
+    image: sonatype/nexus3:3.30.0
+    ports:
+      - 8081:8081
+    volumes:
+      - .nexus:/nexus-data
