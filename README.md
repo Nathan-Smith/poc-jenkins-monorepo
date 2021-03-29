@@ -11,6 +11,10 @@
   - [Structure](#structure)
   - [deps file](#deps-file)
   - [Makefile](#makefile)
+  - [Packaging / Dependency Management Support](#packaging--dependency-management-support)
+    - [npm](#npm)
+    - [gradle (maven)](#gradle-maven)
+    - [docker](#docker)
 - [Git Workflow and Versioning](#git-workflow-and-versioning)
   - [Complete Picture](#complete-picture)
   - [`master`](#master)
@@ -30,6 +34,11 @@
   - [Step 6 - Create third parallel stage](#step-6---create-third-parallel-stage)
   - [Step 7 - Remove Vertices from previous step and find Vertices without Outgoing Edges (i.e. no dependency)](#step-7---remove-vertices-from-previous-step-and-find-vertices-without-outgoing-edges-ie-no-dependency)
   - [Step 8 - Create forth parallel stage](#step-8---create-forth-parallel-stage)
+- [Shallow Builds](#shallow-builds)
+  - [Component Pipeline](#component-pipeline)
+  - [Mono-repo Pipeline](#mono-repo-pipeline)
+  - [Build Retries (partial failure)](#build-retries-partial-failure)
+- [Commit Messages](#commit-messages)
 - [Decisions](#decisions)
   - [D-1 Component Version Source of Truth](#d-1-component-version-source-of-truth)
   - [D-2 Component Independent Versioning](#d-2-component-independent-versioning)
@@ -37,6 +46,22 @@
   - [D-4 Component Pipeline Entry-point](#d-4-component-pipeline-entry-point)
 - [Notes](#notes)
 - [N-1 Finding all build-pipeline-generator test cases with a tree graph](#n-1-finding-all-build-pipeline-generator-test-cases-with-a-tree-graph)
+  - [N-2 Dependency versioning](#n-2-dependency-versioning)
+  - [N-3 Shallow Builds](#n-3-shallow-builds)
+  - [N-4 Fast-Forward Only `--ff-only` Merges and Jenkins Build History](#n-4-fast-forward-only---ff-only-merges-and-jenkins-build-history)
+  - [N-5 Tagging](#n-5-tagging)
+<<<<<<< HEAD
+  - [D-3 Dynamic vs Static Pipeline Generation](#d-3-dynamic-vs-static-pipeline-generation)
+  - [D-4 Component Pipeline Entry-point](#d-4-component-pipeline-entry-point)
+- [Notes](#notes)
+- [N-1 Finding all build-pipeline-generator test cases with a tree graph](#n-1-finding-all-build-pipeline-generator-test-cases-with-a-tree-graph)
+=======
+- [Notes](#notes)
+  - [N-1 Dependency versioning](#n-1-dependency-versioning)
+  - [N-2 Shallow Builds](#n-2-shallow-builds)
+  - [N-3 Fast-Forward Only `--ff-only` Merges and Jenkins Build History](#n-3-fast-forward-only---ff-only-merges-and-jenkins-build-history)
+  - [N-4 Tagging](#n-4-tagging)
+>>>>>>> 62e38e6 (﻿feature: notes)
 
 ## System Dependencies
 
@@ -102,6 +127,14 @@ build:
 publish:
 	echo "Publishing..."
 ```
+
+### Packaging / Dependency Management Support
+
+#### npm
+
+#### gradle (maven)
+
+#### docker
 
 ## Git Workflow and Versioning
 
@@ -359,6 +392,35 @@ Found Vertices labeled with `*`
 └──  lib2  ─────  lib3  ──┴──  app2  ──┴── tests2
 ```
 
+## Shallow Builds
+
+### Component Pipeline
+
+```
+( git #sha )
+      ↓
+( jenkins #build )
+      ↓
+( nexus #version )
+      ↓
+( git tag #version )
+```
+
+### Mono-repo Pipeline
+```
+( git #sha )
+      ↓
+( jenkins #build )
+      ↓
+( git tag #version )
+```
+
+### Build Retries (partial failure)
+
+## Commit Messages
+
+<https://github.com/angular/angular/blob/master/.gitmessage>
+
 ## Decisions
 
 ### D-1 Component Version Source of Truth
@@ -488,3 +550,69 @@ Regex
 ```
 test\(`[\n\s\w└─├│.]+`, \(\) => \{
 ```
+
+### N-2 Dependency versioning
+
+* Component ⇒ Version map file?
+* `package.json`
+  * Version number injection
+  * In-repo file version is `*`?
+    * Local builds?
+*  maven
+* `main`, `develop` and `release/*` branches, consider `hotfix`es
+  * If a version is bumped in both `develop` and `release/*`?
+  * Limit minor and major versions to 'milestone' releases?
+  * Limit patch versions to `hotfix` releases?
+  * Using pre-release versions for `develop`
+* `main`
+  * Merging into `main` removes pre-release
+* `hotfix`
+  * Bump `patch` version on first component change
+  * Pre-release `-hotfix.x` is incremented on every change
+* `develop`
+  * Bump `minor` version on first component change
+  * Bump `minor` version on first component **breaking** change
+  * Pre-release `-dev.x` is incremented on every change
+* `release/*`
+  * Pre-release `-rc.x` is incremented on every change
+
+### N-3 Shallow Builds
+
+* Persistent Storage?
+  * Nexus
+    * Central?
+    * Local?
+      * Can proxy to central on version miss
+  * Jenkins
+    * Build History?
+      * Repo links to builds?
+      * Central Jenkins will retain all branches for 365 days
+  * Git
+    * Central?
+    * Local?
+* Local vs CI builds?
+* Local dev across multiple components?
+
+### N-4 Fast-Forward Only `--ff-only` Merges and Jenkins Build History
+
+* Can builds that occur in `release/*` which will be removed be ported to `master` branch in Jenkins.
+* Do release builds in `master` and `develop` branch?
+* Build Status in Git is linked to commit sha not branch
+* Builds on `master` and `develop` will just be shallow
+  * Can do a mono-repo git version check as complete there
+  * Can derive original build jobs url by using version
+    * `2.5.0` ⇒ `release/2.5`
+    * `2.5.1` ⇒ `hotfix/2.5.1`
+* Cleaner git history
+* Commits don't contain dirty feature / bugfix branch names
+
+### N-5 Tagging
+
+* All components should have a tag?
+  * Shallow builds?
+    * Direct Lookup, component tag
+    * Indirect Lookup?
+  * Cleanup?
+    * If component is missing tag, it checks maven for shallow build quick exit.
+* Pre-release tagging
+  * Cleanup?
