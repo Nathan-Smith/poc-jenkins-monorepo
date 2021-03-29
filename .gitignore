@@ -1,2 +1,3 @@
 .jenkins
+.nexus
 cicd/jenkins/jgrapht-plugin/target
