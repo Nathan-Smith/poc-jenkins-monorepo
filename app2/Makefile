@@ -1,4 +1,6 @@
 
+VERSION=`cat $(VERSION)`
+
 ci: deps test build publish
 
 deps:
@@ -6,7 +8,7 @@ deps:
 
 test:
 	echo "Testing..."
-	
+
 build:
 	echo "Building..."
 

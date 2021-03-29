@@ -1,7 +1,18 @@
 
+version-%-patch:
+	make _version-$*-patch
 
-tree-test:
-	docker-compose run --rm groovy make _tree-test
+_version-%-patch:
+	echo "Patch version bump for $*..."
 
-_tree-test:
-	groovy tree-test.groovy
+version-%-minor:
+	make _version-$*-minor
+
+_version-%-minor:
+	echo "Minor version bump for $*..."
+
+version-%-major:
+	make _version-$*-major
+
+_version-%-major:
+	echo "Major version bump for $*..."

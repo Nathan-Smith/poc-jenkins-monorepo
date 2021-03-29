@@ -1,0 +1,8 @@
+{
+    "markdown.extension.toc.levels": "2..6",
+    "editor.renderWhitespace": "all",
+    "plantuml.render": "PlantUMLServer",
+    "plantuml.server": "https://www.plantuml.com/plantuml",
+    "plantuml.exportFormat": "utxt",
+    "cSpell.enabled": true
+}

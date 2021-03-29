@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  groovy:
+    build:
+      context: .
+      dockerfile: Dockerfile.groovy
+    volumes:
+      - .:/opt/app
+    working_dir: /opt/app

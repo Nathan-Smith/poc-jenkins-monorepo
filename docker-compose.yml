@@ -3,15 +3,8 @@ services:
   jenkins:
     build:
       context: ./cicd/jenkins
-    ports: 
+    ports:
       - 8080:8080
-    volumes: 
+    volumes:
       - .jenkins:/var/jenkins_home
       - .:/var/repo
-  groovy:
-    build:
-      context: .
-      dockerfile: Dockerfile.groovy
-    volumes: 
-      - .:/opt/app
-    working_dir: /opt/app
