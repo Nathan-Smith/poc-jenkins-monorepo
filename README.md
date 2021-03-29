@@ -9,11 +9,6 @@
   - [Structure](#structure)
   - [deps file](#deps-file)
   - [Makefile](#makefile)
-  - [Packaging / Dependency Management Support](#packaging--dependency-management-support)
-    - [npm](#npm)
-    - [gradle (maven)](#gradle-maven)
-    - [docker](#docker)
-- [Git Workflow and Versioning](#git-workflow-and-versioning)
   - [Complete Picture](#complete-picture)
   - [`master`](#master)
   - [`develop`](#develop)
@@ -91,16 +86,6 @@ build:
 publish:
 	echo "Publishing..."
 ```
-
-### Packaging / Dependency Management Support
-
-#### npm
-
-#### gradle (maven)
-
-#### docker
-
-## Git Workflow and Versioning
 
 ### Complete Picture
 ```
