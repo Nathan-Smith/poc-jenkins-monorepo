@@ -9,6 +9,7 @@
   - [Structure](#structure)
   - [deps file](#deps-file)
   - [Makefile](#makefile)
+- [Git Workflow and Versioning](#git-workflow-and-versioning)
   - [Complete Picture](#complete-picture)
   - [`master`](#master)
   - [`develop`](#develop)
@@ -86,6 +87,8 @@ build:
 publish:
 	echo "Publishing..."
 ```
+
+## Git Workflow and Versioning
 
 ### Complete Picture
 ```
