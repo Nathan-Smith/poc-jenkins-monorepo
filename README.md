@@ -37,6 +37,7 @@
   - [D-4 Component Pipeline Entry-point](#d-4-component-pipeline-entry-point)
 - [Notes](#notes)
 - [N-1 Finding all build-pipeline-generator test cases with a tree graph](#n-1-finding-all-build-pipeline-generator-test-cases-with-a-tree-graph)
+- [N-99 Pipeline Code Gen](#n-99-pipeline-code-gen)
 
 ## System Dependencies
 
@@ -488,3 +489,8 @@ Regex
 ```
 test\(`[\n\s\w└─├│.]+`, \(\) => \{
 ```
+
+## N-99 Pipeline Code Gen
+  * Scripted and Declarative cannot mix
+  * Code generate pipeline in root Jenkinsfile using dependency graph and `Jenkinsfile` like file in each component
+    * This should be run in an `init` stage to check if codegen is behind working copy.

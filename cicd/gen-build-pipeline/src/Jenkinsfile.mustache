@@ -1,0 +1,18 @@
+{{! Following line is for the generated file }}
+// This file is generated from cicd/gen-build-pipeline/src/Jenkinsfile.mustache, read README.md for instructions to update
+
+pipeline {
+  agent any
+
+  stages {
+    {{#parallelStages}}
+    stage('{{name}}') {
+      parallel {
+        {{#stages}}
+{{{.}}}
+        {{/stages}}
+      }
+    }
+    {{/parallelStages}}
+  }
+}
