@@ -1,5 +1,7 @@
 blueocean:1.24.4
 configuration-as-code:1.47
 git:4.7.0
+github-branch-source:2.10.2
+github-checks:1.0.11
 job-dsl:1.77
 pipeline-utility-steps:2.6.1

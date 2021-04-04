@@ -4,6 +4,8 @@
   - [Required](#required)
   - [Optional](#optional)
 - [Running CI/CD Locally](#running-cicd-locally)
+  - [Optional Setup Configuration](#optional-setup-configuration)
+  - [Running CI/CD](#running-cicd)
   - [Stopping CI/CD](#stopping-cicd)
 - [Components](#components)
   - [Structure](#structure)
@@ -45,9 +47,17 @@
 
 ## Running CI/CD Locally
 
+### Optional Setup Configuration
+
+1. `$ make envfile`
+2. Add values for Github
+
+### Running CI/CD
+
 `$  docker-compose up`
 
 Jenkins will be available on `http://localhost:8080`
+
 Nexus will be available on `http://localhost:8081`
 
 ### Stopping CI/CD

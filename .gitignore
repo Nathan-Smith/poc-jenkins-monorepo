@@ -1,3 +1,5 @@
+.env
 .jenkins
 .nexus
 cicd/jenkins/jgrapht-plugin/target
+node_modules
