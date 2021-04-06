@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   jenkins:
+    env_file: .env
     build:
       context: ./cicd/jenkins
     ports:
@@ -8,3 +9,13 @@ services:
     volumes:
       - .jenkins:/var/jenkins_home
       - .:/var/repo
+  nexus:
+    image: sonatype/nexus3:3.30.0
+    ports:
+      - 8081:8081
+    volumes:
+      - .nexus:/nexus-data
+  smee-client:
+    build:
+      context: ./cicd/smee-client
+    command: "-u https://smee.io/${SMEE_ID} -t http://jenkins:8080/github-webhook/"
