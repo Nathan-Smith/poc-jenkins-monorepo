@@ -1,4 +1,5 @@
-COMPOSE_RUN_NODE = docker-compose run --rm --service-ports node
+COMPOSE_RUN_NODE = docker-compose run --rm node
+COMPOSE_RUN_NODE_DEBUG = docker-compose run --rm --service-ports node
 
 export WORKSPACE_PREFIX = /build
 export WORKING_DIR = $(WORKSPACE_PREFIX)$(shell echo "$(WORKSPACE)" | sed -e 's|^'$(AGENT_ROOT)'||')
@@ -13,7 +14,7 @@ ci: ci-deps test pipeline pipeline-check
 ci-deps: deps
 
 debug-tests:
-	$(COMPOSE_RUN_NODE) node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest --runInBand
+	$(COMPOSE_RUN_NODE_DEBUG) node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest --runInBand
 
 deps: _npm-install
 
