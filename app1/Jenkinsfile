@@ -1,0 +1,7 @@
+stage('app1') {
+  steps {
+    dir('app1') {
+      sh 'make ci'
+    }
+  }
+}
