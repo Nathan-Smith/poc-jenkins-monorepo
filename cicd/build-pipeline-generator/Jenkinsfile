@@ -1,0 +1,7 @@
+stage('build-pipeline-generator') {
+  steps {
+    dir('cicd/build-pipeline-generator') {
+      sh 'make ci'
+    }
+  }
+}

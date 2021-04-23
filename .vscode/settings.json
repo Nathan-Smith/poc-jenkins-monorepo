@@ -4,5 +4,10 @@
     "plantuml.render": "PlantUMLServer",
     "plantuml.server": "https://www.plantuml.com/plantuml",
     "plantuml.exportFormat": "utxt",
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "cSpell.words": [
+        "Jenkinsfile",
+        "parallelisation"
+    ],
+    "eslint.format.enable": true
 }

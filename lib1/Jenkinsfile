@@ -1,0 +1,5 @@
+stage("lib1") {
+  steps {
+    echo "Component... lib1"
+  }
+}

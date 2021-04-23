@@ -33,6 +33,10 @@
 - [Decisions](#decisions)
   - [D-1 Component Version Source of Truth](#d-1-component-version-source-of-truth)
   - [D-2 Component Independent Versioning](#d-2-component-independent-versioning)
+  - [D-3 Dynamic vs Static Pipeline Generation](#d-3-dynamic-vs-static-pipeline-generation)
+  - [D-4 Component Pipeline Entry-point](#d-4-component-pipeline-entry-point)
+- [Notes](#notes)
+- [N-1 Finding all build-pipeline-generator test cases with a tree graph](#n-1-finding-all-build-pipeline-generator-test-cases-with-a-tree-graph)
 
 ## System Dependencies
 
@@ -404,14 +408,14 @@ Found Vertices labeled with `*`
 * **Outcome**:
   * Option 2: Semantic Versioning per component
 * **Options**:
-  * **Option 1**: Aligned to Mono-repo `VERSION`
+  * **Option 1**: Aligned to Monorepo `VERSION`
     * **Pros:**
       * Consistent across components
     * **Cons:**
       * Breaking changes across components are not defined as a major version bump
   * **Option 2**: Semantic Versioning per component
     * **Pros:**
-      * Existing components migrated to Mono-repo can retain versioning lineage
+      * Existing components migrated to Monorepo can retain versioning lineage
     * **Cons:**
       * Each component requires versioning step
       * Each dependent dependencies require change
@@ -421,3 +425,66 @@ Found Vertices labeled with `*`
     * Build Pipeline asserts dependent requires change if dependencies change
       * This doesn't 100% assert that dependent change actually targets new dependency version, but should be captured during code review
         * Could use dependency reports to check pre-build
+
+### D-3 Dynamic vs Static Pipeline Generation
+
+* **Outcome**:
+  * Option 2: Static Pipeline Generation
+* **Options**:
+  * **Option 1**: Dynamic Pipeline Generation
+    * **Pros:**
+      * Always consistent with the structure / changes to the Monorepo
+      * Can be combined with Shallow Builds to further improve pipeline parallelisation
+    * **Cons:**
+      * Requires custom Jenkins plugin to include the graph library needed to construct the build pipeline on startup
+      * The resulting build pipeline can't be examined until after the build is complete
+      * Restricted to Scripted Pipeline, can't include declarative pipeline fragments
+  * **Option 2**: Static Pipeline Generation
+    * **Pros:**
+      * Can support Component `Jenkinsfile` fragment, the number of stages and what Agent is used for each stage is possible
+      * Produces a standard `Jenkinsfile` file that can be examined to debug issues
+      * Can run in any Jenkins instance without custom plugins or settings
+      * Declarative Pipeline
+    * **Cons:**
+      * Requires tooling, validation and git manipulation to keep consistent with the structure / changes to the Monorepo
+      * Can't produce a pipeline that maximizes pipeline parallelisation using Shallow Builds, the pipeline 'structure' is always the same
+* **Recommended Option**:
+  * Option 2: Static Pipeline Generation
+    * Alike D-2, the Monorepo already needs to deal with `VERSION` consistency by validating and updating inline to git commits,
+    * Build Pipeline will generate the pipeline and asserts diff on component ⇒ requires `Jenkinsfile` update using the build-pipeline-generator tool
+    * Tooling can be enhanced to automatically update the `Jenkinsfile` and amend the commit.
+
+### D-4 Component Pipeline Entry-point
+
+* **Outcome**:
+  * Option 3: Minimal `Jenkinsfile`
+* **Options**:
+  * **Option 1**: `Makefile`
+    * **Pros:**
+      * No additional `Jenkinsfile`
+    * **Cons:**
+      * Can't define the Agent to build on (non 3 musketeers builds)
+  * **Option 2**: Complete `Jenkinsfile`
+    * **Pros:**
+      * Consistent pattern to non Monorepo components
+    * **Cons:**
+      * Requires tooling to extract stages since only 1 `pipeline` can be loaded in a build
+  * **Option 3**: Minimal `Jenkinsfile`
+    * **Pros:**
+      * Can define the Agent to build on
+      * Can define multiple stages
+    * **Cons:**
+      * Not a standard structure it starts with `stage` not `pipeline`
+* **Recommended Option**:
+  * Option 3: Minimal `Jenkinsfile`
+    * Given D-3, the build-pipeline-generator combines all `Jenkinsfile` fragments into a complete top-level `Jenkinsfile`
+    * Tooling can be enhanced to deal with no `Jenkinsfile` and run a `ci` target defined in the `Makefile`
+
+## Notes
+
+## N-1 Finding all build-pipeline-generator test cases with a tree graph
+
+Regex
+```
+test\(`[\n\s\w└─├│.]+`, \(\) => \{
+```
