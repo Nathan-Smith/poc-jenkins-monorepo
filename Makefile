@@ -6,6 +6,9 @@ ENVFILE ?= env.template
 envfile:
 	cp -f $(ENVFILE) .env
 
+build-pipeline:
+	cd cicd/build-pipeline-generator && make pipeline
+
 version-%-patch:
 	make _version-$*-patch
 

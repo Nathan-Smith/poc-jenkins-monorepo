@@ -1,0 +1,5 @@
+stage("tests2") {
+  steps {
+    echo "Component... tests2"
+  }
+}
