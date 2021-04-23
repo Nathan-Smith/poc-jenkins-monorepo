@@ -1,13 +1,14 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
+  numExecutors: 4
 jobs:
   - script: >
-      multibranchPipelineJob('poc-jenkins-mono-repo') {
+      multibranchPipelineJob('poc-jenkins-monorepo') {
         branchSources {
           github {
-            id = 'poc-jenkins-mono-repo'
+            id = 'poc-jenkins-monorepo'
             repoOwner('Nathan-Smith')
-            repository('poc-jenkins-mono-repo')
+            repository('poc-jenkins-monorepo')
             scanCredentialsId('81001ac6-a96b-4423-aa2d-cb574d7c2fe7')
           }
         }
