@@ -1,4 +1,11 @@
 
+# ENVFILE is env.template by default but can be overwritten
+ENVFILE ?= env.template
+
+# envfile creates or overwrites .env with $(ENVFILE)
+envfile:
+	cp -f $(ENVFILE) .env
+
 version-%-patch:
 	make _version-$*-patch
 

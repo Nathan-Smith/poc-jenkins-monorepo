@@ -5,6 +5,8 @@ blueocean:1.24.4
 cloudbees-bitbucket-branch-source:2.9.7
 configuration-as-code:1.47
 git:4.7.1
+github-branch-source:2.10.2
+github-checks:1.0.11
 github:1.33.1
 job-dsl:1.77
 pipeline-utility-steps:2.6.1

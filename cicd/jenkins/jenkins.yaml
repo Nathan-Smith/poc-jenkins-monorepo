@@ -2,11 +2,13 @@ jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
 jobs:
   - script: >
-      multibranchPipelineJob('repo') {
+      multibranchPipelineJob('poc-jenkins-mono-repo') {
         branchSources {
-          git {
-            id = 'repo'
-            remote('/var/repo')
+          github {
+            id = 'poc-jenkins-mono-repo'
+            repoOwner('Nathan-Smith')
+            repository('poc-jenkins-mono-repo')
+            scanCredentialsId('81001ac6-a96b-4423-aa2d-cb574d7c2fe7')
           }
         }
       }
@@ -19,3 +21,22 @@ security:
     - "method org.jgrapht.Graph removeVertex java.lang.Object"
     - "method org.jgrapht.Graph vertexSet"
     - "new org.jgrapht.graph.DefaultDirectedGraph java.lang.Class"
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          description: "GitHub Personal Access Token"
+          id: "af5ca59f-7b63-43a1-9c50-90ec1ad21d39"
+          scope: GLOBAL
+          secret: ${GITHUB_PERSONAL_ACCESS_TOKEN}
+      - usernamePassword:
+          description: "GitHub Personal Access Token"
+          id: "81001ac6-a96b-4423-aa2d-cb574d7c2fe7"
+          scope: GLOBAL
+          password: ${GITHUB_PERSONAL_ACCESS_TOKEN}
+unclassified:
+  gitHubPluginConfig:
+    configs:
+    - credentialsId: "af5ca59f-7b63-43a1-9c50-90ec1ad21d39"
+      manageHooks: false

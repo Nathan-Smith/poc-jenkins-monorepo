@@ -4,6 +4,8 @@
   - [Required](#required)
   - [Optional](#optional)
 - [Running CI/CD Locally](#running-cicd-locally)
+  - [Optional Setup Configuration](#optional-setup-configuration)
+  - [Running CI/CD](#running-cicd)
   - [Stopping CI/CD](#stopping-cicd)
 - [Components](#components)
   - [Structure](#structure)
@@ -45,13 +47,22 @@
 
 ## Running CI/CD Locally
 
-`$  docker-compose up jenkins`
+### Optional Setup Configuration
 
-This will run on `http://localhost:8080`
+1. `$ make envfile`
+2. Add values for Github
+
+### Running CI/CD
+
+`$  docker-compose up`
+
+Jenkins will be available on `http://localhost:8080`
+
+Nexus will be available on `http://localhost:8081`
 
 ### Stopping CI/CD
 
-`$ docker-compose down jenkins`
+`$ docker-compose down`
 
 ## Components
 
