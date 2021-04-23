@@ -4,11 +4,18 @@ services:
     env_file: .env
     build:
       context: ./cicd/jenkins
+    user: root
     ports:
       - 8080:8080
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/bin/com.docker.cli:/usr/bin/com.docker.cli
+      - /usr/bin/docker-compose:/usr/bin/docker-compose
       - .jenkins:/var/jenkins_home
-      - .:/var/repo
+    environment:
+      AGENT_ROOT: /var/jenkins_home
+      WORKSPACE_MOUNT: ${PWD}/.jenkins
   nexus:
     image: sonatype/nexus3:3.30.0
     ports:
