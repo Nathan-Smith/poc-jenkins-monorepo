@@ -1,54 +1,76 @@
-import org.jgrapht.graph.*
+// This file is generated from cicd/build-pipeline-generator/src/Jenkinsfile.mustache, read README.md for instructions to update
 
-void stageFactory(String name) {
-    node {
-        stage(name) {
-            checkout(scm)
-            dir(name) {
-                sh "make ci"
+pipeline {
+  agent any
+
+  stages {
+    stage('1') {
+      parallel {
+        stage('build-pipeline-generator') {
+          steps {
+            dir('cicd/build-pipeline-generator') {
+              sh 'make ci'
             }
+          }
         }
+
+        stage("lib1") {
+          steps {
+            echo "Component... lib1"
+          }
+        }
+
+        stage("lib2") {
+          steps {
+            echo "Component... lib2"
+          }
+        }
+
+      }
     }
-}
-
-node {
-    checkout(scm)
-
-    def graph = findFiles()                                                     // Only traverses to top-level directory for components
-        .findAll { it.directory }
-        .findAll { fileExists("${it.name}/Makefile") }
-        .findAll { fileExists("${it.name}/deps") }
-        .collectEntries {                                                       // Create a Map of component to dependencies
-            [(it.name) : readFile("${it.name}/deps").split('\n')]               // deps file should be a list seperated by newline
-        }
-        .inject(new DefaultDirectedGraph<String>(DefaultEdge.class)) { graph, component ->      // Map components and its dependencies to a directed graph
-            graph.addVertex(component.key)
-
-            component.value.each { dep ->
-                graph.addVertex(dep)
-                graph.addEdge(component.key, dep)                               // A dependency is represented by a edge in the graph (note this is a single direction)
-            }
-
-            graph
+    stage('2') {
+      parallel {
+        stage("lib3") {
+          steps {
+            echo "Component... lib3"
+          }
         }
 
-    while(graph.vertexSet().size() > 0) {                                       // Keep building until the graph is empty, no verticies == no build stages
-        def stages = graph.vertexSet().findResults { node ->
-            if (graph.outgoingEdgesOf(node).size() == 0) {                      // Only care about verticies that have no edges pointing to something, this means it can be built without relying on something to be build first
-                return node
-            }
-        }
-
-        if (stages.size() > 1) {                                                // Optimise build time by running stages in parallel, this is safe because all the stages have no dependency on each other
-            parallel stages.collectEntries {
-                [it, { stageFactory(it) }]
-            }
-        } else {
-            stageFactory(stages[0])
-        }
-
-        stages.each {                                                           // Once all the stages are done, remove them from the graph, this will allow the next iteration of this while loop to identity new vertices that have no dependencies (because they are already built)
-            graph.removeVertex(it)
-        }
+      }
     }
+    stage('3') {
+      parallel {
+        stage('app1') {
+          steps {
+            dir('app1') {
+              sh 'make ci'
+            }
+          }
+        }
+
+        stage("app2") {
+          steps {
+            echo "Component... app2"
+          }
+        }
+
+      }
+    }
+    stage('4') {
+      parallel {
+        stage("tests1") {
+          steps {
+            echo "Component... tests1"
+          }
+        }
+
+        stage("tests2") {
+          steps {
+            echo "Component... tests2"
+          }
+        }
+
+      }
+    }
+  }
 }
