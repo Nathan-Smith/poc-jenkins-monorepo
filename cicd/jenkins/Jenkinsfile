@@ -1,0 +1,7 @@
+stage('jenkins') {
+  steps {
+    dir('cicd/jenkins') {
+      sh 'make ci'
+    }
+  }
+}

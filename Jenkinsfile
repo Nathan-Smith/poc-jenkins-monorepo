@@ -14,6 +14,14 @@ pipeline {
           }
         }
 
+        stage('jenkins') {
+          steps {
+            dir('cicd/jenkins') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage("lib1") {
           steps {
             echo "Component... lib1"
