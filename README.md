@@ -5,6 +5,7 @@
   - [Optional](#optional)
 - [Running CI/CD Locally](#running-cicd-locally)
   - [Optional Setup Configuration](#optional-setup-configuration)
+    - [Nexus `.env` User Format](#nexus-env-user-format)
   - [Running CI/CD](#running-cicd)
   - [Stopping CI/CD](#stopping-cicd)
 - [Components](#components)
@@ -54,7 +55,32 @@
 ### Optional Setup Configuration
 
 1. `$ make envfile`
-2. Add values for Github
+2. Set `GITHUB_PERSONAL_ACCESS_TOKEN` to update Build Status in Github
+3. Set `NEXUS_ADMIN_PASSWORD` to a secure & private password for the Nexus Admin User
+4. Set `NEXUS_ADMIN_USERS` to a set of Users whom will have the Admin Role in Nexus, see below for the expected formatting
+5. Set `NEXUS_DEPLOYER_USERS` to a set of Users whom will have the Deployer Role in Nexus
+6. Set `SMEE_ID` to receive webhooks from Github, provided by [smee.io](https://smee.io/)
+
+#### Nexus `.env` User Format
+
+Similar to [HTTP Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie), key and value are separated by `=`, key-value pairs are separated by `;` and objects (collection of key-value pairs) are separated by `:`. Be mindful of special characters in passwords.
+
+Basic format:
+```
+key=value;key=value:key=value;key=value
+```
+
+Full example:
+```
+username=test;firstname=Test;lastname=User;email=test2.user@example.org;password=test123;:username=test2;firstname=Test2;lastname=User;email=test2.user@example.org;password=test123;
+```
+
+Every User should have:
+* `username`
+* `firstname`
+* `lastname`
+* `email`
+* `password`
 
 ### Running CI/CD
 

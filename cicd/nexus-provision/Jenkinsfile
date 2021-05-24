@@ -1,0 +1,7 @@
+stage('nexus-provision') {
+  steps {
+    dir('cicd/nexus-provision') {
+      sh 'make ci'
+    }
+  }
+}

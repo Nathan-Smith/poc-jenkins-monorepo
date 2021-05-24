@@ -22,6 +22,14 @@ pipeline {
           }
         }
 
+        stage('nexus') {
+          steps {
+            dir('cicd/nexus') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage("lib1") {
           steps {
             echo "Component... lib1"
@@ -38,6 +46,14 @@ pipeline {
     }
     stage('2') {
       parallel {
+        stage('nexus-provision') {
+          steps {
+            dir('cicd/nexus-provision') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage("lib3") {
           steps {
             echo "Component... lib3"

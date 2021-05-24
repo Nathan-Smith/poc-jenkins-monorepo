@@ -1,0 +1,7 @@
+stage('nexus') {
+  steps {
+    dir('cicd/nexus') {
+      sh 'make ci'
+    }
+  }
+}

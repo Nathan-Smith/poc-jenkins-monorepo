@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  nexus:
+    env_file: ../../.env
+    build:
+      context: ../nexus
+    ports:
+      - 9081:8081
+      - 9082:8082
+  nexus-provision:
+    env_file: ../../.env
+    build:
+      context: .
+  openjdk8:
+    image: adoptopenjdk/openjdk8:jdk8u292-b10-alpine
+    working_dir: ${WORKING_DIR}/cicd/nexus-provision
+    volumes:
+      - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
+  test-maven:
+    build:
+      context: ./src/__tests__/test-maven
+  test-npm:
+    build:
+      context: ./src/__tests__/test-npm

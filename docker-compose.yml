@@ -17,12 +17,23 @@ services:
       AGENT_ROOT: /var/jenkins_home
       WORKSPACE_MOUNT: ${PWD}/.jenkins
   nexus:
-    image: sonatype/nexus3:3.30.0
+    env_file: .env
+    build:
+      context: ./cicd/nexus
     ports:
       - 8081:8081
     volumes:
-      - .nexus:/nexus-data
+      - nexus-data:/nexus-data
+  nexus-provision:
+    env_file: .env
+    build:
+      context: ./cicd/nexus-provision
+    depends_on:
+      - nexus
+    restart: "no"
   smee-client:
     build:
       context: ./cicd/smee-client
     command: "-u https://smee.io/${SMEE_ID} -t http://jenkins:8080/github-webhook/"
+volumes:
+  nexus-data:
