@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "nathan-smith.poc-jenkins-repo.nexus-provision"
-version = "0.1.0-rc.0"
+version = "0.1.0"
 
 description = "Nexus 3 Provision"
 
