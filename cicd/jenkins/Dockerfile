@@ -9,6 +9,13 @@ ENV CASC_JENKINS_CONFIG=/usr/share/jenkins/ref/jenkins.yaml
 
 USER root
 
-RUN apk add --update make
+RUN apk add \
+    -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
+    --update \
+      make \
+      step-cli
 
 USER jenkins
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]

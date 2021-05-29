@@ -5,7 +5,7 @@
   - [Optional](#optional)
 - [Running CI/CD Locally](#running-cicd-locally)
   - [Optional Setup Configuration](#optional-setup-configuration)
-    - [Nexus `.env` User Format](#nexus-env-user-format)
+    - [`NEXUS_ADMIN_USERS` and `NEXUS_DEPLOYER_USERS` Format](#nexus_admin_users-and-nexus_deployer_users-format)
   - [Running CI/CD](#running-cicd)
   - [Stopping CI/CD](#stopping-cicd)
 - [Components](#components)
@@ -45,10 +45,12 @@
 * [Docker](https://www.docker.com/products/docker-desktop)
 * [Compose](https://docs.docker.com/compose/install)
 * [make](https://www.gnu.org/software/make)
+* [step-cli](https://smallstep.com/docs/step-cli/installation)
 
 ### Optional
 * [Visual Studio Code](https://code.visualstudio.com)
   * `.vscode` contains useful extensions for documentation authoring
+* [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download)
 
 ## Running CI/CD Locally
 
@@ -61,7 +63,7 @@
 5. Set `NEXUS_DEPLOYER_USERS` to a set of Users whom will have the Deployer Role in Nexus
 6. Set `SMEE_ID` to receive webhooks from Github, provided by [smee.io](https://smee.io/)
 
-#### Nexus `.env` User Format
+#### `NEXUS_ADMIN_USERS` and `NEXUS_DEPLOYER_USERS` Format
 
 Similar to [HTTP Set-Cookie](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie), key and value are separated by `=`, key-value pairs are separated by `;` and objects (collection of key-value pairs) are separated by `:`. Be mindful of special characters in passwords.
 
@@ -84,11 +86,20 @@ Every User should have:
 
 ### Running CI/CD
 
-`$  docker-compose up`
+The CI/CD stack will bind to port 80 and 443
 
-Jenkins will be available on `http://localhost:8080`
+Run the stack: `$ docker-compose up`
 
-Nexus will be available on `http://localhost:8081`
+Once the stack is running, to access HTTPS run:
+```
+$ step ca bootstrap --ca-url https://ca-127-0-0-1.nip.io --install --fingerprint 84a033e84196f73bd593fad7a63e509e57fd982f02084359c4e8c5c864efc27d`
+```
+
+Jenkins will be available on `https://jenkins-127-0-0-1.nip.io`
+
+Nexus will be available on `https://nexus-127-0-0-1.nip.io`
+
+Docker Repository will be available on `https://docker-repository-127-0-0-1.nip.io`
 
 ### Stopping CI/CD
 

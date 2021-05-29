@@ -1,0 +1,45 @@
+{
+  "root": "/run/secrets/root_ca.crt",
+  "crt": "/run/secrets/intermediate_ca.crt",
+  "key": "/run/secrets/intermediate_ca_key",
+  "password": "password",
+  "address": ":443",
+  "dnsNames": [
+    "ca-127-0-0-1.nip.io",
+    "ca",
+    "docker-repository-127-0-0-1.nip.io",
+    "jenkins-127-0-0-1.nip.io",
+    "localhost",
+    "nexus-127-0-0-1.nip.io"
+  ],
+  "logger": {
+    "format": "text"
+  },
+  "authority": {
+    "provisioners": [
+      {
+        "type": "JWK",
+        "name": "admin",
+        "key": {
+          "use": "sig",
+          "kty": "EC",
+          "kid": "CXgEGRHJPdw7K5BMxx5NbaqywXGiXFwnLisfI6uD5jw",
+          "crv": "P-256",
+          "alg": "ES256",
+          "x": "qPu3_09OeioHtaNc7BtvhpRKZzFRHK74rfYQSI-uwiE",
+          "y": "yXerSo-t8qvc-z-kuVihsQIIJCOsJ_AeaCpylhHnTBc"
+        },
+        "encryptedKey": "eyJhbGciOiJQQkVTMi1IUzI1NitBMTI4S1ciLCJjdHkiOiJqd2sranNvbiIsImVuYyI6IkEyNTZHQ00iLCJwMmMiOjEwMDAwMCwicDJzIjoiOHV5Y2ZWRjI5dlVnaXdQUTZ6WG13QSJ9.y1Lf-JtqvcfkTqRN4FzgpZ2Svskvu17hhEN5Fb-Nn6GztT8kRZOpgw.A9LCJPqglzKWmJjG.0yIVRxCl14HxRw94H8EGh-2k63rQ8_6XZ53loox9y2aB4X3Xbg2oLA4hSvrsAsf3UY2IG3eUryyJQL33DYW1YCXFuKGh46W9OKhIhb1YEOiskJUQf3lbhrvOHgwa8InpEwT3D913DBgrjTPfR6ZjUDOTMJEr0u_zv3p2fuD41Lu1nhlboNFlZ6wC96iTXILbdlTrKXuk4DEJWs9t1NVgqXf1NqnlLbHj4I3hNT1Jd8h51v1LPrMnUpXy-am5pVrGoVobsUhOdADXMffKUz_glLptGpgwBPGyg7pgeDRnmWBB-a8tTZOCWPsL4WjMsxHNTrE35HQX5FKVsuAv-lc.69ZTKyzDcdWdWbxDjvWZHA"
+      }
+    ]
+  },
+  "tls": {
+    "cipherSuites": [
+      "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305",
+      "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256"
+    ],
+    "minVersion": 1.2,
+    "maxVersion": 1.2,
+    "renegotiation": false
+  }
+}

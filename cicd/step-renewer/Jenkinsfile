@@ -1,0 +1,7 @@
+stage('step-renewer') {
+  steps {
+    dir('cicd/step-renewer') {
+      sh 'make ci'
+    }
+  }
+}

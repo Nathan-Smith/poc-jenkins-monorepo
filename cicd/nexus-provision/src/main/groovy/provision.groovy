@@ -1,6 +1,7 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import org.sonatype.nexus.blobstore.api.BlobStoreManager
+import org.sonatype.nexus.repository.config.WritePolicy
 import org.sonatype.nexus.security.realm.RealmManager
 import org.sonatype.nexus.security.user.User
 import org.sonatype.nexus.security.user.UserSearchCriteria
@@ -10,6 +11,8 @@ def payload = new Payload(new JsonSlurper().parseText(args as String))
 def response = [
   repositories: []
 ]
+
+core.baseUrl("https://nexus-127-0-0-1.nip.io")
 
 // Download dependencies doesn't require any User Authentication, access is controlled by the availablility of Nexus to CI/CD and local development environments.
 security.setAnonymousAccess(true)
@@ -73,7 +76,16 @@ if (!repository.repositoryManager.exists('npm-all')) {
 
 // Provision Docker hosted repo and expose via https to allow deployments
 if (!repository.repositoryManager.exists('docker-internal')) {
-  newRepos << repository.createDockerHosted('docker-internal', null, 8082)
+  newRepos << repository.createDockerHosted(
+    'docker-internal',
+    8082,
+    null,
+    BlobStoreManager.DEFAULT_BLOBSTORE_NAME,
+    true,
+    true,
+    WritePolicy.ALLOW,
+    false
+  )
 }
 
 // Provision Docker proxy repo of Docker Hub and enable v1 to get search to work

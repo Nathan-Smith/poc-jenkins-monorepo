@@ -41,3 +41,5 @@ unclassified:
     configs:
     - credentialsId: "af5ca59f-7b63-43a1-9c50-90ec1ad21d39"
       manageHooks: false
+  location:
+    url: "https://jenkins-127-0-0-1.nip.io/"

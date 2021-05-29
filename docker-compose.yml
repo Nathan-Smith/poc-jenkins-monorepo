@@ -1,12 +1,27 @@
 version: "3.9"
 services:
+  ca:
+    build:
+      context: ./cicd/step-ca
+    ports:
+      - "8443:443"
+    restart: always
+    environment:
+      VIRTUAL_HOST: ca-127-0-0-1.nip.io
+      VIRTUAL_PROTO: https
+  docker-repository-proxy:
+    build:
+      context: ./cicd/docker-repository-proxy
+    environment:
+      VIRTUAL_HOST: docker-repository-127-0-0-1.nip.io
+      VIRTUAL_PORT: 8080
   jenkins:
+    depends_on:
+      - ca
     env_file: .env
     build:
       context: ./cicd/jenkins
     user: root
-    ports:
-      - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
@@ -15,15 +30,35 @@ services:
       - .jenkins:/var/jenkins_home
     environment:
       AGENT_ROOT: /var/jenkins_home
+      STEP_CA_URL: https://ca
+      STEP_FINGERPRINT: 84a033e84196f73bd593fad7a63e509e57fd982f02084359c4e8c5c864efc27d
+      VIRTUAL_HOST: jenkins-127-0-0-1.nip.io
+      VIRTUAL_PORT: 8080
       WORKSPACE_MOUNT: ${PWD}/.jenkins
+    links:
+      - "ingress:docker-repository-127-0-0-1.nip.io"
+      - "ingress:nexus-127-0-0-1.nip.io"
+  ingress:
+    depends_on:
+      - renewer
+    build:
+      context: ./cicd/ingress
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certificates:/etc/nginx/certs:ro
+    restart: always
   nexus:
     env_file: .env
     build:
       context: ./cicd/nexus
-    ports:
-      - 8081:8081
     volumes:
       - nexus-data:/nexus-data
+    environment:
+      VIRTUAL_HOST: nexus-127-0-0-1.nip.io
+      VIRTUAL_PORT: 8081
   nexus-provision:
     env_file: .env
     build:
@@ -31,9 +66,24 @@ services:
     depends_on:
       - nexus
     restart: "no"
+  renewer:
+    depends_on:
+      - ca
+    build:
+      context: ./cicd/step-renewer
+    volumes:
+      - certificates:/var/local/step
+    environment:
+      STEP_CA_URL: https://ca
+      STEP_FINGERPRINT: 84a033e84196f73bd593fad7a63e509e57fd982f02084359c4e8c5c864efc27d
+      STEP_KID: CXgEGRHJPdw7K5BMxx5NbaqywXGiXFwnLisfI6uD5jw
+      STEP_PROVISIONER_PASSWORD: admin123
+      STEP_ROOT: /var/local/step/root_ca.crt
+      STEPPATH: /home/step
   smee-client:
     build:
       context: ./cicd/smee-client
     command: "-u https://smee.io/${SMEE_ID} -t http://jenkins:8080/github-webhook/"
 volumes:
   nexus-data:
+  certificates:

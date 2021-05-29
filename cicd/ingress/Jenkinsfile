@@ -1,0 +1,7 @@
+stage('ingress') {
+  steps {
+    dir('cicd/ingress') {
+      sh 'make ci'
+    }
+  }
+}

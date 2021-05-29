@@ -1,0 +1,7 @@
+stage('step-ca') {
+  steps {
+    dir('cicd/step-ca') {
+      sh 'make ci'
+    }
+  }
+}

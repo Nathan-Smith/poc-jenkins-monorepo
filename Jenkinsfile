@@ -14,6 +14,22 @@ pipeline {
           }
         }
 
+        stage('docker-repository-proxy') {
+          steps {
+            dir('cicd/docker-repository-proxy') {
+              sh 'make ci'
+            }
+          }
+        }
+
+        stage('ingress') {
+          steps {
+            dir('cicd/ingress') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage('jenkins') {
           steps {
             dir('cicd/jenkins') {
@@ -25,6 +41,22 @@ pipeline {
         stage('nexus') {
           steps {
             dir('cicd/nexus') {
+              sh 'make ci'
+            }
+          }
+        }
+
+        stage('step-ca') {
+          steps {
+            dir('cicd/step-ca') {
+              sh 'make ci'
+            }
+          }
+        }
+
+        stage('step-renewer') {
+          steps {
+            dir('cicd/step-renewer') {
               sh 'make ci'
             }
           }

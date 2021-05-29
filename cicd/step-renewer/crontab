@@ -1,0 +1,5 @@
+# Modified from: https://raw.githubusercontent.com/smallstep/certificates/0d4f96c1d9a9d78fc5a9cdc727e83723930803af/examples/docker/renewer/crontab
+# min	hour	day	month	weekday	command
+*	*	*	*	*	step ca renew --force /var/local/step/ca-127-0-0-1.nip.io.crt /var/local/step/ca-127-0-0-1.nip.io.key
+*	*	*	*	*	step ca renew --force /var/local/step/jenkins-127-0-0-1.nip.io.crt /var/local/step/jenkins-127-0-0-1.nip.io.key
+*	*	*	*	*	step ca renew --force /var/local/step/nexus-127-0-0-1.nip.io.crt /var/local/step/nexus-127-0-0-1.nip.io.key

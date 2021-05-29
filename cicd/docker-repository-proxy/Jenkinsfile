@@ -1,0 +1,7 @@
+stage('docker-repository-proxy') {
+  steps {
+    dir('cicd/docker-repository-proxy') {
+      sh 'make ci'
+    }
+  }
+}
