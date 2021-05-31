@@ -36,6 +36,12 @@ credentials:
           id: "81001ac6-a96b-4423-aa2d-cb574d7c2fe7"
           scope: GLOBAL
           password: ${GITHUB_PERSONAL_ACCESS_TOKEN}
+      - usernamePassword:
+          description: "Docker Repository"
+          id: "docker-repository-127-0-0-1.nip.io"
+          password: "jenkins123"
+          scope: GLOBAL
+          username: "jenkins"
 unclassified:
   gitHubPluginConfig:
     configs:

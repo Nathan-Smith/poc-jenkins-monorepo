@@ -6,8 +6,18 @@ ENVFILE ?= env.template
 envfile:
 	cp -f $(ENVFILE) .env
 
+bootstrap:
+	cd cicd/docker-repository-proxy && $(MAKE) build-image
+	cd cicd/ingress && $(MAKE) build-image
+	cd cicd/jenkins && $(MAKE) build-image
+	cd cicd/nexus && $(MAKE) build-image
+	cd cicd/nexus-provision && $(MAKE) build-image
+	cd cicd/smee-client && $(MAKE) build-image
+	cd cicd/step-ca && $(MAKE) build-image
+	cd cicd/step-renewer && $(MAKE) build-image
+
 build-pipeline:
-	cd cicd/build-pipeline-generator && make pipeline
+	cd cicd/build-pipeline-generator && $(MAKE) pipeline
 
 version-%-patch:
 	make _version-$*-patch

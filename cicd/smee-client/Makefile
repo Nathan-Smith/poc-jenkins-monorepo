@@ -1,5 +1,5 @@
 VERSION :=$(file < VERSION)
-IMAGE_TAG :=docker-repository-127-0-0-1.nip.io/jenkins:$(VERSION)
+IMAGE_TAG :=docker-repository-127-0-0-1.nip.io/smee-client:$(VERSION)
 
 # Pipeline Targets
 

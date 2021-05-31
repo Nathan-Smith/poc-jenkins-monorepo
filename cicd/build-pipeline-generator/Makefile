@@ -32,6 +32,9 @@ npm-run-%:
 test-%:
 	$(COMPOSE_RUN_NODE) npm run test -- $*
 
+update-test-snapshots:
+	$(COMPOSE_RUN_NODE) npm run test -- --updateSnapshot
+
 watch-tests:
 	$(COMPOSE_RUN_NODE) npm run test -- --watch --updateSnapshot
 

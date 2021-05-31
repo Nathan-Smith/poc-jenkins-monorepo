@@ -1,8 +1,7 @@
 version: "3.9"
 services:
   ca:
-    build:
-      context: ./cicd/step-ca
+    image: docker-repository-127-0-0-1.nip.io/step-ca:0.2.0-dev.0
     ports:
       - "8443:443"
     restart: always
@@ -10,17 +9,15 @@ services:
       VIRTUAL_HOST: ca-127-0-0-1.nip.io
       VIRTUAL_PROTO: https
   docker-repository-proxy:
-    build:
-      context: ./cicd/docker-repository-proxy
+    image: docker-repository-127-0-0-1.nip.io/docker-repository-proxy:0.2.0-dev.0
     environment:
       VIRTUAL_HOST: docker-repository-127-0-0-1.nip.io
       VIRTUAL_PORT: 8080
   jenkins:
+    image: docker-repository-127-0-0-1.nip.io/jenkins:0.2.0-dev.0
     depends_on:
       - ca
     env_file: .env
-    build:
-      context: ./cicd/jenkins
     user: root
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -39,10 +36,9 @@ services:
       - "ingress:docker-repository-127-0-0-1.nip.io"
       - "ingress:nexus-127-0-0-1.nip.io"
   ingress:
+    image: docker-repository-127-0-0-1.nip.io/ingress:0.2.0-dev.0
     depends_on:
       - renewer
-    build:
-      context: ./cicd/ingress
     ports:
       - "80:80"
       - "443:443"
@@ -51,26 +47,23 @@ services:
       - certificates:/etc/nginx/certs:ro
     restart: always
   nexus:
+    image: docker-repository-127-0-0-1.nip.io/nexus:0.2.0-dev.0
     env_file: .env
-    build:
-      context: ./cicd/nexus
     volumes:
       - nexus-data:/nexus-data
     environment:
       VIRTUAL_HOST: nexus-127-0-0-1.nip.io
       VIRTUAL_PORT: 8081
   nexus-provision:
+    image: docker-repository-127-0-0-1.nip.io/nexus-provision:0.2.0-dev.0
     env_file: .env
-    build:
-      context: ./cicd/nexus-provision
     depends_on:
       - nexus
     restart: "no"
   renewer:
+    image: docker-repository-127-0-0-1.nip.io/step-renewer:0.2.0-dev.0
     depends_on:
       - ca
-    build:
-      context: ./cicd/step-renewer
     volumes:
       - certificates:/var/local/step
     environment:
@@ -81,8 +74,7 @@ services:
       STEP_ROOT: /var/local/step/root_ca.crt
       STEPPATH: /home/step
   smee-client:
-    build:
-      context: ./cicd/smee-client
+    image: docker-repository-127-0-0-1.nip.io/smee-client:0.1.0-dev.0
     command: "-u https://smee.io/${SMEE_ID} -t http://jenkins:8080/github-webhook/"
 volumes:
   nexus-data:

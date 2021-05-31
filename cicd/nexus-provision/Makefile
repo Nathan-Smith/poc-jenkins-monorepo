@@ -1,3 +1,6 @@
+VERSION :=$(file < VERSION)
+IMAGE_TAG :=docker-repository-127-0-0-1.nip.io/nexus-provision:$(VERSION)
+
 COMPOSE_RUN_NEXUS_PROVISION = docker-compose run  --rm nexus-provision
 COMPOSE_RUN_OPENJDK8 = docker-compose run  --rm openjdk8
 COMPOSE_RUN_TEST_MAVEN = docker-compose run  --rm test-maven
@@ -9,7 +12,7 @@ export WORKSPACE_MOUNT ?= ../..
 
 # Pipeline Targets
 
-ci: envfile build test
+ci: envfile build test build-image push-image
 
 # Public Targets
 
@@ -19,6 +22,12 @@ envfile:
 build:
 	$(COMPOSE_RUN_OPENJDK8) ./gradlew build
 .PHONY: build
+
+build-image:
+	docker build --no-cache -t $(IMAGE_TAG) .
+
+push-image:
+	docker push $(IMAGE_TAG)
 
 test: _clean-docker _start-nexus
 	docker-compose build nexus-provision

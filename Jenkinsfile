@@ -4,6 +4,15 @@ pipeline {
   agent any
 
   stages {
+    stage('init') {
+      environment {
+        DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+      }
+      steps {
+        sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+      }
+    }
+
     stage('1') {
       parallel {
         stage('build-pipeline-generator') {
@@ -41,6 +50,14 @@ pipeline {
         stage('nexus') {
           steps {
             dir('cicd/nexus') {
+              sh 'make ci'
+            }
+          }
+        }
+
+        stage('smee-client') {
+          steps {
+            dir('cicd/smee-client') {
               sh 'make ci'
             }
           }

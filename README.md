@@ -7,6 +7,7 @@
   - [Optional Setup Configuration](#optional-setup-configuration)
     - [`NEXUS_ADMIN_USERS` and `NEXUS_DEPLOYER_USERS` Format](#nexus_admin_users-and-nexus_deployer_users-format)
   - [Running CI/CD](#running-cicd)
+    - [Bootstrap Images](#bootstrap-images)
   - [Stopping CI/CD](#stopping-cicd)
 - [Components](#components)
   - [Structure](#structure)
@@ -85,6 +86,10 @@ Every User should have:
 * `password`
 
 ### Running CI/CD
+
+#### Bootstrap Images
+
+To create the images for CI/CD before deployment run: `$ make bootstrap`
 
 The CI/CD stack will bind to port 80 and 443
 

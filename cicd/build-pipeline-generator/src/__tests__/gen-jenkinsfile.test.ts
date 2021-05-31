@@ -16,6 +16,15 @@ test('empty pipeline', () => {
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
       }
     }
     "
@@ -46,6 +55,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('app1') {}
@@ -87,6 +105,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('lib1') {}
@@ -139,6 +166,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('lib1') {}
@@ -198,6 +234,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('lib1') {}
@@ -264,6 +309,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('lib1') {}
@@ -352,6 +406,15 @@ test(`
       agent any
 
       stages {
+        stage('init') {
+          environment {
+            DOCKER_CREDENTIALS = credentials('docker-repository-127-0-0-1.nip.io')
+          }
+          steps {
+            sh 'docker login https://docker-repository-127-0-0-1.nip.io -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+          }
+        }
+
         stage('1') {
           parallel {
             stage('app3') {}

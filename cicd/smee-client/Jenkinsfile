@@ -1,0 +1,7 @@
+stage('smee-client') {
+  steps {
+    dir('cicd/smee-client') {
+      sh 'make ci'
+    }
+  }
+}
