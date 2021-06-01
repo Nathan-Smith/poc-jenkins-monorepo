@@ -249,3 +249,18 @@ test('do not include root', () => {
   const graph = generateDepGraph(process.cwd())
   expect(graph.size()).toBe(1)
 })
+
+test('ignore node_modules', () => {
+  mockFs({
+    app1: {
+      Jenkinsfile: 'stage {}',
+      VERSION: '0.1.0\n',
+      node_modules: {
+        ...mockComponent('app2'),
+      }
+    },
+  })
+
+  const graph = generateDepGraph(process.cwd())
+  expect(graph.size()).toBe(1)
+})

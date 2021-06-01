@@ -20,7 +20,7 @@ export function mockComponent(
   return {
     [path]: {
       Jenkinsfile: `stage('${basename(path)}') {}`,
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
       ...(deps.length > 0
         ? {
             deps: deps.join('\n'),

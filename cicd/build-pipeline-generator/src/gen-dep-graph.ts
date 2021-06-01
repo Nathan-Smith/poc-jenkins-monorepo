@@ -19,7 +19,7 @@ export default function generateDepGraph(
   rootPath: string
 ): DepGraph<Component> {
   return glob
-    .sync('*/**/VERSION', { cwd: rootPath }) // Find components by directories containing a VERSION
+    .sync('*/**/VERSION', { cwd: rootPath, ignore: ['**/node_modules/**'] }) // Find components by directories containing a VERSION
     .map(dirname) // Just need the directory name, since this is what the component is named
     .reduce((graph, path, _i, paths) => {
       const component = basename(path)
