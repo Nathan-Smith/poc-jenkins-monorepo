@@ -182,7 +182,7 @@ test(`
 test('missing Jenkinsfile in app1', () => {
   mockFs({
     app1: {
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
     },
   })
 
@@ -194,12 +194,12 @@ test('missing Jenkinsfile in app1', () => {
 test('missing Jenkinsfile in lib1', () => {
   mockFs({
     lib1: {
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
     },
     app1: {
       deps: 'lib1',
       Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
     },
   })
 
@@ -216,7 +216,7 @@ test('missing VERSION', () => {
     app1: {
       deps: 'lib1',
       Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
     },
   })
 
@@ -230,7 +230,7 @@ test('missing lib', () => {
     app1: {
       deps: 'lib1',
       Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0',
+      VERSION: '0.1.0\n',
     },
   })
 
@@ -241,7 +241,7 @@ test('missing lib', () => {
 
 test('do not include root', () => {
   mockFs({
-    VERSION: '0.1.0',
+    VERSION: '0.1.0\n',
     Jenkinsfile: 'stage {}',
     ...mockComponent('app1'),
   })
