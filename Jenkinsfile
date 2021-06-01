@@ -79,6 +79,14 @@ pipeline {
           }
         }
 
+        stage('validate-version') {
+          steps {
+            dir('cicd/validate-version') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage("lib1") {
           steps {
             echo "Component... lib1"

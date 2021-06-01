@@ -12,6 +12,24 @@ jobs:
             scanCredentialsId('81001ac6-a96b-4423-aa2d-cb574d7c2fe7')
           }
         }
+        configure { node ->
+          node / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits' << 'org.jenkinsci.plugins.github__branch__source.BranchDiscoveryTrait' {
+            'strategyId'(3)
+          }
+          node / 'sources' / 'data' / 'jenkins.branch.BranchSource' / 'source' / 'traits' << 'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait' {
+            'templates' {
+              'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate' {
+                'value'('+refs/heads/main:refs/remotes/origin/main')
+              }
+              'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate' {
+                'value'('+refs/heads/develop:refs/remotes/origin/develop')
+              }
+              'jenkins.plugins.git.traits.RefSpecsSCMSourceTrait_-RefSpecTemplate' {
+                'value'('+refs/heads/release/*:refs/remotes/origin/release/*')
+              }
+            }
+          }
+        }
       }
 security:
   scriptApproval:

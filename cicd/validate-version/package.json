@@ -1,0 +1,11 @@
+{
+  "name": "validate-version",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "semver": "7.3.5"
+  }
+}

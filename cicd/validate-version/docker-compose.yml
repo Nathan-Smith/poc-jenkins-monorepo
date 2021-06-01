@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+  validate-version:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: validate-version
+    environment:
+      - BRANCH_NAME
+    working_dir: ${WORKING_DIR}
+    volumes:
+      - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}

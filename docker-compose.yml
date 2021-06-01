@@ -14,7 +14,7 @@ services:
       VIRTUAL_HOST: docker-repository-127-0-0-1.nip.io
       VIRTUAL_PORT: 8080
   jenkins:
-    image: docker-repository-127-0-0-1.nip.io/jenkins:0.2.0-dev.0
+    image: docker-repository-127-0-0-1.nip.io/jenkins:0.2.0-dev.1
     depends_on:
       - ca
     env_file: .env
@@ -24,6 +24,7 @@ services:
       - /usr/bin/docker:/usr/bin/docker
       - /usr/bin/com.docker.cli:/usr/bin/com.docker.cli
       - /usr/bin/docker-compose:/usr/bin/docker-compose
+      - /usr/bin/docker-compose-v1:/usr/bin/docker-compose-v1
       - .jenkins:/var/jenkins_home
     environment:
       AGENT_ROOT: /var/jenkins_home

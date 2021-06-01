@@ -19,6 +19,9 @@ bootstrap:
 build-pipeline:
 	cd cicd/build-pipeline-generator && $(MAKE) pipeline
 
+validate-version:
+	cd cicd/validate-version && $(MAKE) validate-version
+
 version-%-patch:
 	make _version-$*-patch
 

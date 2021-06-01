@@ -1,0 +1,7 @@
+stage('validate-version') {
+  steps {
+    dir('cicd/validate-version') {
+      sh 'make ci'
+    }
+  }
+}
