@@ -44,6 +44,8 @@ function testUnstableBranch {
 
   git checkout -b $base_branch
 
+  echo "0.1.0" > VERSION
+
   mkdir app1
   touch app1/README.md
   touch app1/test.js
@@ -123,7 +125,14 @@ EOF
 function expected {
   cat <<EOF
 validate_code=1
-diff=diff --git a/app1/VERSION b/app1/VERSION
+diff=diff --git a/VERSION b/VERSION
+index 6e8bf73..3a9f305 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.1.0
++0.2.0-dev.0
+diff --git a/app1/VERSION b/app1/VERSION
 index 6e8bf73..3a9f305 100644
 --- a/app1/VERSION
 +++ b/app1/VERSION
@@ -140,7 +149,14 @@ testUnstableBranch "feature" "develop" $(expected)
 function expected {
   cat <<EOF
 validate_code=1
-diff=diff --git a/app1/VERSION b/app1/VERSION
+diff=diff --git a/VERSION b/VERSION
+index 6e8bf73..bba3d1a 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.1.0
++0.2.0-rc.0
+diff --git a/app1/VERSION b/app1/VERSION
 index 6e8bf73..bba3d1a 100644
 --- a/app1/VERSION
 +++ b/app1/VERSION
@@ -157,7 +173,14 @@ testUnstableBranch "bugfix" "release/1.0" $(expected)
 function expected {
   cat <<EOF
 validate_code=1
-diff=diff --git a/app1/VERSION b/app1/VERSION
+diff=diff --git a/VERSION b/VERSION
+index 6e8bf73..17e51c3 100644
+--- a/VERSION
++++ b/VERSION
+@@ -1 +1 @@
+-0.1.0
++0.1.1
+diff --git a/app1/VERSION b/app1/VERSION
 index 6e8bf73..17e51c3 100644
 --- a/app1/VERSION
 +++ b/app1/VERSION

@@ -18,19 +18,21 @@ root=$(git rev-parse --show-toplevel)
 
 changed_components=()
 
-verboseLog "-- changed_components --"
-
-# Filter any directory that is not a Component, all Components must have a VERSION file
-for i in "${directories_with_change[@]}"; do
-  if [[ -e "$root/$i/VERSION" ]]; then
-    changed_components+=($i)
-    verboseLog $i
-  fi
-done
-
 # Find all the components, the process is improved by not looking in directories that would never contain a Component
 all_components=($(find $root -type d \( -name node_modules -o -name .jenkins \) -prune -false -o -type f -name VERSION -printf "%P\n" | xargs -I {} dirname {} | sort | uniq))
 unset all_components[0]
+
+verboseLog "-- changed_components --"
+
+# Filter Components that contain some change
+for i in "${all_components[@]}"; do
+  for j in "${directories_with_change[@]}"; do
+    if [[ "$j" =~ "$i" ]]; then
+      changed_components+=($i)
+      verboseLog $i
+    fi
+  done
+done
 
 components_with_dependencies=()
 

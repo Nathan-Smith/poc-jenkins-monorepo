@@ -78,6 +78,12 @@ mkdir lib2
 touch lib2/README.md
 echo "0.1.0" > lib2/VERSION
 
+mkdir lib3
+touch lib3/README.md
+mkdir lib3/part
+touch lib3/part/index.js
+echo "0.1.0" > lib3/VERSION
+
 git add .
 git commit -m "Commit on $base_branch"
 git checkout -b $branch_type/testing-detection
@@ -89,6 +95,7 @@ echo "Hello world" > app2/test.js
 echo "Hello world" > app2/part/index.js
 echo "0.2.0-dev.0" > app2/VERSION
 echo "Hello world" > lib2/test.js
+echo "Hello world" > lib3/part/index.js
 
 git add .
 git commit -m "Commit on $branch_type/testing-detection"
@@ -101,6 +108,7 @@ app1
 app2
 app3
 lib2
+lib3
 test1
 EOF
 }

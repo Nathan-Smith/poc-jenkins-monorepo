@@ -42,8 +42,9 @@ function testBumpBaseVersions {
   initial_versions=$3
   changed_versions=$4
   expected_versions=$5
+  checkout_base=$6
 
-  test_name="TEST - Bump Base Versions for $branch_type "
+  test_name="TEST - Bump Base Versions for $branch_type with checkout_base=$checkout_base"
 
   setup "$test_name"
 
@@ -107,7 +108,16 @@ function testBumpBaseVersions {
   git add .
   git commit -m "Commit on $branch_type/testing-detection"
 
+  if [[ "$checkout_base" == "true" ]]; then
+    git checkout $base_branch
+  fi
+
   ../src/bump-base-versions.sh
+
+  if [[ "$checkout_base" == "true" ]]; then
+    mkdir test2
+    touch test2/VERSION
+  fi
 
   function actual {
     cat <<EOF
@@ -164,7 +174,7 @@ expected_versions[lib2]="0.2.0-dev.1"
 expected_versions[test1]="0.2.0-dev.0"
 expected_versions[test2]="2.3.0-dev.0"
 
-testBumpBaseVersions "feature" "develop" initial_versions changed_versions expected_versions
+testBumpBaseVersions "feature" "develop" initial_versions changed_versions expected_versions "false"
 
 # -----------------------------------------------------------------------------
 
@@ -190,7 +200,7 @@ expected_versions[lib2]="0.2.0-rc.1"
 expected_versions[test1]="0.2.0-rc.0"
 expected_versions[test2]="2.3.0-rc.0"
 
-testBumpBaseVersions "bugfix" "release/1.0" initial_versions changed_versions expected_versions
+testBumpBaseVersions "bugfix" "release/1.0" initial_versions changed_versions expected_versions "false"
 
 # -----------------------------------------------------------------------------
 
@@ -216,7 +226,7 @@ expected_versions[lib2]="0.2.1"
 expected_versions[test1]="0.1.1"
 expected_versions[test2]="2.3.0"
 
-testBumpBaseVersions "hotfix" "main" initial_versions changed_versions expected_versions
+testBumpBaseVersions "hotfix" "main" initial_versions changed_versions expected_versions "false"
 
 # -----------------------------------------------------------------------------
 
@@ -242,7 +252,50 @@ expected_versions[lib2]="0.2.0-dev.1"
 expected_versions[test1]="0.2.0-dev.0"
 expected_versions[test2]="2.3.0-dev.0"
 
-testBumpBaseVersions "feature" "develop" initial_versions changed_versions expected_versions
+testBumpBaseVersions "feature" "develop" initial_versions changed_versions expected_versions "false"
+
+# -----------------------------------------------------------------------------
+
+function testStableBranch {
+  branch_type=$1
+  base_branch=$2
+
+  initial_versions[.]="0.1.0-dev.0"
+  initial_versions[app1]="0.1.0"
+  initial_versions[app2]="0.1.0"
+  initial_versions[app3]="0.1.0"
+  initial_versions[lib1]="0.1.0"
+  initial_versions[lib2]="0.2.0-dev.0"
+  initial_versions[test1]="0.1.0"
+
+  changed_versions[.]="0.1.0-dev.1"
+  changed_versions[app1]="0.2.0-dev.0"
+  changed_versions[app2]="0.1.1-dev.0"
+  changed_versions[test2]="2.3.0-dev.0"
+
+  expected_versions[.]="0.1.0-dev.0"
+  expected_versions[app1]="0.1.0"
+  expected_versions[app2]="0.1.0"
+  expected_versions[app3]="0.1.0"
+  expected_versions[lib1]="0.1.0"
+  expected_versions[lib2]="0.2.0-dev.0"
+  expected_versions[test1]="0.1.0"
+  expected_versions[test2]=""
+
+  testBumpBaseVersions $branch_type $base_branch initial_versions changed_versions expected_versions "true"
+}
+
+# -----------------------------------------------------------------------------
+
+testStableBranch "feature" "develop"
+
+# -----------------------------------------------------------------------------
+
+testStableBranch "bugfix" "release/1.0"
+
+# -----------------------------------------------------------------------------
+
+testStableBranch "hotfix" "main"
 
 # -----------------------------------------------------------------------------
 

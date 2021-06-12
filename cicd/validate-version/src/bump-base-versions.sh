@@ -20,7 +20,14 @@ case "$branch_type" in
   bugfix)
     preid="rc"
     ;;
+  develop|main)
+    exit 0
+    ;;
 esac
+
+if [[ "$branch_type" =~ "release/" ]]; then
+  exit 0
+fi
 
 verboseLog "base_commit=$base_commit"
 
