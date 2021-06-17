@@ -257,7 +257,7 @@ test('ignore node_modules', () => {
       VERSION: '0.1.0\n',
       node_modules: {
         ...mockComponent('app2'),
-      }
+      },
     },
   })
 

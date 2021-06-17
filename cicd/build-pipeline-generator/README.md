@@ -70,7 +70,7 @@ Find all listing issue
 
 `$ make npm-run-lint-fix`
 
-### test-*
+### test-\*
 
 Run a test for a given file name
 

@@ -13,15 +13,11 @@ export default function generateJenkinsfile(pipeline: Pipeline): string {
         ...parallelStage,
         stages: parallelStage.stages.map((stage) =>
           redent(
-            fs.readFileSync(
-              path.resolve(stage.path, 'Jenkinsfile'),
-              'utf8'
-            ),
+            fs.readFileSync(path.resolve(stage.path, 'Jenkinsfile'), 'utf8'),
             8
           )
-        )
-        })
-      ),
+        ),
+      })),
     }
   )
 }

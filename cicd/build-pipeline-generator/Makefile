@@ -1,5 +1,7 @@
-COMPOSE_RUN_NODE = docker-compose run --rm node
-COMPOSE_RUN_NODE_DEBUG = docker-compose run --rm --service-ports node
+COMPOSE_RUN_DEV = docker-compose run --rm dev
+COMPOSE_RUN_DEV_DEBUG = docker-compose run --rm --service-ports dev
+COMPOSE_RUN_TEST = docker-compose run --rm test
+COMPOSE_RUN_BUILD_PIPELINE_GENERATOR = docker-compose run --rm build-pipeline-generator
 
 export WORKSPACE_PREFIX = /build
 export WORKING_DIR = $(WORKSPACE_PREFIX)$(shell echo "$(WORKSPACE)" | sed -e 's|^'$(AGENT_ROOT)'||')
@@ -7,41 +9,73 @@ export WORKSPACE_MOUNT ?= ../..
 
 # Pipeline Targets
 
-ci: ci-deps test pipeline pipeline-check
+ci: validate-lint validate-format validate-ts test validate-build-pipeline
 
 # Public Targets
 
-ci-deps: deps
-
 debug-tests:
-	$(COMPOSE_RUN_NODE_DEBUG) node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest --runInBand
+	$(COMPOSE_RUN_DEV_DEBUG) node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest --runInBand
 
 deps: _npm-install
 
-test: npm-run-lint npm-run-format _npx-tsc npm-run-test
+dev-env:
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) /bin/bash
+
+test:
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) npm run test
+
+test-env:
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) /bin/bash
+
+validate-lint:
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) npm run lint
+
+validate-format:
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) npm run format
+
+validate-ts:
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) npx tsc
 
 pipeline:
-	$(COMPOSE_RUN_NODE) npx ts-node src/index.ts -o ../../Jenkinsfile
+	docker-compose build build-pipeline-generator
+	$(COMPOSE_RUN_BUILD_PIPELINE_GENERATOR)
 
-pipeline-check:
-	$(COMPOSE_RUN_NODE) sh ./src/pipeline-check.sh
+validate-build-pipeline:
+	docker-compose build build-pipeline-generator
+	$(COMPOSE_RUN_BUILD_PIPELINE_GENERATOR) --validate
 
 npm-run-%:
-	$(COMPOSE_RUN_NODE) npm run $*
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npm run $*
 
 test-%:
-	$(COMPOSE_RUN_NODE) npm run test -- $*
+	docker-compose build test
+	$(COMPOSE_RUN_TEST) npm run test -- $*
 
 update-test-snapshots:
-	$(COMPOSE_RUN_NODE) npm run test -- --updateSnapshot
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npm run test -- --updateSnapshot
 
 watch-tests:
-	$(COMPOSE_RUN_NODE) npm run test -- --watch --updateSnapshot
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npm run test -- --watch --updateSnapshot
+
+npm-install-%:
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npm install -DE $*
 
 # Private Targets
 
 _npm-%:
-	$(COMPOSE_RUN_NODE) npm $*
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npm $*
 
 _npx-%:
-	$(COMPOSE_RUN_NODE) npx $*
+	docker-compose build dev
+	$(COMPOSE_RUN_DEV) npx $*

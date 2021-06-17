@@ -1,13 +1,28 @@
-version: "3.9"
+version: '3.9'
 services:
-  node:
+  dev:
     build:
       context: .
-      dockerfile: node.Dockerfile
+      dockerfile: Dockerfile
+      target: dev
+    stdin_open: true
+    tty: true
     init: true
     ports:
-      - "9229:9229"
-    image: build-pipeline-generator-node:2
-    working_dir: ${WORKING_DIR}/cicd/build-pipeline-generator
+      - '9229:9229'
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+  build-pipeline-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build-pipeline-generator
+    working_dir: ${WORKING_DIR}
     volumes:
       - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
