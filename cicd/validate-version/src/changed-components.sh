@@ -27,7 +27,7 @@ verboseLog "-- changed_components --"
 # Filter Components that contain some change
 for i in "${all_components[@]}"; do
   for j in "${directories_with_change[@]}"; do
-    if [[ "$j" =~ "$i" ]]; then
+    if [[ "$j/" =~ "$i/" ]]; then # logic brokwn here, partical matches get captured too!!!
       changed_components+=($i)
       verboseLog $i
     fi

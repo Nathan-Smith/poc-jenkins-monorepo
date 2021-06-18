@@ -128,9 +128,33 @@ pipeline {
     stage('2') {
       parallel {
         stage('nexus-provision') {
-          steps {
-            dir('cicd/nexus-provision') {
-              sh 'make ci'
+          stages {
+            stage('nexus-provision-require-build') {
+              steps {
+                script {
+                  env.NEXUS_PROVISION_REQUIRE_BUILD = sh(returnStdout: true, script: 'cd cicd/nexus-provision && make require-build').trim()
+                }
+              }
+            }
+            stage('nexus-provision-build') {
+              when {
+                anyOf {
+                  environment name: 'NEXUS_PROVISION_REQUIRE_BUILD', value: 'YES'
+                  allOf {
+                    anyOf {
+                      branch 'bugfix/*'
+                      branch 'feature/*'
+                      branch 'hotfix/*'
+                    }
+                    changeset '**/cicd/nexus-provision/**'
+                  }
+                }
+              }
+              steps {
+                dir('cicd/nexus-provision') {
+                  sh 'make ci'
+                }
+              }
             }
           }
         }

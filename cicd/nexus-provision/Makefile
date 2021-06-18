@@ -16,6 +16,9 @@ ci: envfile build test build-image push-image
 
 # Public Targets
 
+require-build:
+	@docker manifest inspect $(IMAGE_TAG) > /dev/null 2>&1 && echo "NO" || echo "YES"
+
 envfile:
 	cd ../.. && make envfile ENVFILE=env.example
 
