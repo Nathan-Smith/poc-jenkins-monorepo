@@ -40,9 +40,33 @@ pipeline {
         }
 
         stage('jenkins') {
-          steps {
-            dir('cicd/jenkins') {
-              sh 'make ci'
+          stages {
+            stage('jenkins-require-build') {
+              steps {
+                script {
+                  env.JENKINS_REQUIRE_BUILD = sh(returnStdout: true, script: 'cd cicd/jenkins && make require-build').trim()
+                }
+              }
+            }
+            stage('jenkins-build') {
+              when {
+                anyOf {
+                  environment name: 'JENKINS_REQUIRE_BUILD', value: 'YES'
+                  allOf {
+                    anyOf {
+                      branch 'bugfix/*'
+                      branch 'feature/*'
+                      branch 'hotfix/*'
+                    }
+                    changeset '**/cicd/jenkins/**'
+                  }
+                }
+              }
+              steps {
+                dir('cicd/jenkins') {
+                  sh 'make ci'
+                }
+              }
             }
           }
         }
