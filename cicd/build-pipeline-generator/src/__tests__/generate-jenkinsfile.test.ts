@@ -1,11 +1,21 @@
-import mockFs from 'mock-fs'
+import { vol } from 'memfs'
+import path from 'path'
 
-import generateJenkinsfile from '../gen-jenkinsfile'
+import generateJenkinsfile from '../generate-jenkinsfile'
 import { mockComponent } from './__helpers__/mockComponent'
 
-afterEach(mockFs.restore)
+afterEach(() => vol.reset())
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock('fs', () => require('memfs').fs)
+
+const realFs = jest.requireActual('fs')
+const templatePath = path.resolve(__dirname, '../Jenkinsfile.mustache')
 
 test('empty pipeline', () => {
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
+  })
   const jenkinsfile = generateJenkinsfile({
     parallelStages: [],
   })
@@ -35,8 +45,8 @@ test(`
 .
 └── app1
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
   })
 
@@ -66,7 +76,7 @@ test(`
 
         stage('1') {
           parallel {
-            stage('app1') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }
@@ -80,8 +90,8 @@ test(`
 └── app1
     └── lib1
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
     ...mockComponent('lib1'),
   })
@@ -116,12 +126,12 @@ test(`
 
         stage('1') {
           parallel {
-            stage('lib1') {}
+            stage('lib1') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('2') {
           parallel {
-            stage('app1') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }
@@ -137,8 +147,8 @@ test(`
 └── app2
     └── lib1
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
     ...mockComponent('app2'),
     ...mockComponent('lib1'),
@@ -177,13 +187,13 @@ test(`
 
         stage('1') {
           parallel {
-            stage('lib1') {}
+            stage('lib1') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('2') {
           parallel {
-            stage('app1') {}
-            stage('app2') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('app2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }
@@ -201,8 +211,8 @@ test(`
     ├── lib1
     └── lib2
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
     ...mockComponent('app2'),
     ...mockComponent('lib1'),
@@ -245,14 +255,14 @@ test(`
 
         stage('1') {
           parallel {
-            stage('lib1') {}
-            stage('lib2') {}
+            stage('lib1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('lib2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('2') {
           parallel {
-            stage('app1') {}
-            stage('app2') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('app2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }
@@ -271,8 +281,8 @@ test(`
         ├── lib1
         └── lib2
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
     ...mockComponent('app2'),
     ...mockComponent('lib1'),
@@ -320,19 +330,19 @@ test(`
 
         stage('1') {
           parallel {
-            stage('lib1') {}
-            stage('lib2') {}
+            stage('lib1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('lib2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('2') {
           parallel {
-            stage('app1') {}
-            stage('app2') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('app2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('3') {
           parallel {
-            stage('tests1') {}
+            stage('tests1') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }
@@ -357,8 +367,8 @@ test(`
         └── lib3
             └── lib2
 `, () => {
-  mockFs({
-    'src/Jenkinsfile.mustache': mockFs.load('src/Jenkinsfile.mustache'),
+  vol.fromJSON({
+    [templatePath]: realFs.readFileSync(templatePath, 'utf8'),
     ...mockComponent('app1'),
     ...mockComponent('app2'),
     ...mockComponent('app3'),
@@ -417,26 +427,26 @@ test(`
 
         stage('1') {
           parallel {
-            stage('app3') {}
-            stage('lib1') {}
-            stage('lib2') {}
+            stage('app3') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('lib1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('lib2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('2') {
           parallel {
-            stage('lib3') {}
+            stage('lib3') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('3') {
           parallel {
-            stage('app1') {}
-            stage('app2') {}
+            stage('app1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('app2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
         stage('4') {
           parallel {
-            stage('tests1') {}
-            stage('tests2') {}
+            stage('tests1') { steps { sh 'echo \\"Hello World\\"' } }
+            stage('tests2') { steps { sh 'echo \\"Hello World\\"' } }
           }
         }
       }

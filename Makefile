@@ -16,8 +16,8 @@ bootstrap:
 	cd cicd/step-ca && $(MAKE) build-image
 	cd cicd/step-renewer && $(MAKE) build-image
 
-build-pipeline:
-	cd cicd/build-pipeline-generator && $(MAKE) pipeline
+build-pipeline-generator:
+	cd cicd/build-pipeline-generator && $(MAKE) build-pipeline-generator
 
 validate-version:
 	cd cicd/validate-version && $(MAKE) validate-version

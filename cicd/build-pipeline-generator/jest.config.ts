@@ -25,7 +25,7 @@ export default {
     '!**/node_modules/**',
     '!jest.config.ts',
     '!**/__tests__/**',
-    '!src/index.ts',
+    '!**/index.ts',
   ],
 
   // The directory where Jest should output its coverage files
@@ -72,6 +72,10 @@ export default {
   // A set of global variables that need to be available in all test environments
   // globals: {},
 
+  haste: {
+    enableSymlinks: true,
+  },
+
   // The maximum amount of workers used to run your tests. Can be specified as % or a number. E.g. maxWorkers: 10% will use 10% of your CPU amount + 1 as the maximum worker number. maxWorkers: 2 will use a maximum of 2 workers.
   // maxWorkers: "50%",
 
@@ -109,7 +113,7 @@ export default {
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
-  reporters: ['default', 'jest-junit'],
+  reporters: ['default'],
 
   // Automatically reset mock state between every test
   // resetMocks: false,
@@ -124,7 +128,7 @@ export default {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  // rootDir: undefined,
+  rootDir: './src',
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
@@ -198,5 +202,5 @@ export default {
   // watchPathIgnorePatterns: [],
 
   // Whether to use watchman for file crawling
-  // watchman: true,
+  watchman: false,
 }

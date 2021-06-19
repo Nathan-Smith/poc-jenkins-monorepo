@@ -1,10 +1,11 @@
-import FileSystem from 'mock-fs/lib/filesystem'
+import { DirectoryJSON } from 'memfs'
 import { basename } from 'path'
 
 /**
  * Create a mock component, use this with mock-fs
  * @param path Component Name
- * @param deps List of Component Dependencies
+ * @param deps Optional, defaults to []. List of Component Dependencies
+ * @param Jenkinsfile Optional, defaults to valid Jenkinsfile. Custom Jenkinsfile
  * @returns Directory containing a Jenkinsfile and optionally a deps file
  * @example
  * ```
@@ -15,17 +16,18 @@ import { basename } from 'path'
  */
 export function mockComponent(
   path: string,
-  ...deps: string[]
-): FileSystem.DirectoryItems {
+  deps: string[] = [],
+  Jenkinsfile = `stage('${basename(
+    path
+  )}') { steps { sh 'echo "Hello World"' } }`
+): DirectoryJSON {
   return {
-    [path]: {
-      Jenkinsfile: `stage('${basename(path)}') {}`,
-      VERSION: '0.1.0\n',
-      ...(deps.length > 0
-        ? {
-            deps: deps.join('\n'),
-          }
-        : {}),
-    },
+    [`${path}/Jenkinsfile`]: Jenkinsfile,
+    [`${path}/VERSION`]: '0.1.0\n',
+    ...(deps.length > 0
+      ? {
+          [`${path}/deps`]: deps.join('\n'),
+        }
+      : {}),
   }
 }

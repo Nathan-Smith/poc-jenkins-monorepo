@@ -1,15 +1,18 @@
-import mockFs from 'mock-fs'
+import { vol } from 'memfs'
 
-import generateDepGraph from '../gen-dep-graph'
+import generateDepGraph from '../generate-dep-graph'
 import { mockComponent } from './__helpers__/mockComponent'
 
-afterEach(mockFs.restore)
+afterEach(() => vol.reset())
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+jest.mock('fs', () => require('memfs').fs)
 
 test(`
 .
 └── app1
 `, () => {
-  mockFs({
+  vol.fromJSON({
     ...mockComponent('app1'),
   })
 
@@ -26,8 +29,8 @@ test(`
 └── app1
     └── lib1
 `, () => {
-  mockFs({
-    ...mockComponent('app1', 'lib1'),
+  vol.fromJSON({
+    ...mockComponent('app1', ['lib1']),
     ...mockComponent('lib1'),
   })
 
@@ -48,9 +51,9 @@ test(`
 └── app2
     └── lib1
 `, () => {
-  mockFs({
-    ...mockComponent('app1', 'lib1'),
-    ...mockComponent('app2', 'lib1'),
+  vol.fromJSON({
+    ...mockComponent('app1', ['lib1']),
+    ...mockComponent('app2', ['lib1']),
     ...mockComponent('lib1'),
   })
 
@@ -75,9 +78,9 @@ test(`
     ├── lib1
     └── lib2
 `, () => {
-  mockFs({
-    ...mockComponent('app1', 'lib1', 'lib2'),
-    ...mockComponent('app2', 'lib1', 'lib2'),
+  vol.fromJSON({
+    ...mockComponent('app1', ['lib1', 'lib2']),
+    ...mockComponent('app2', ['lib1', 'lib2']),
     ...mockComponent('lib1'),
     ...mockComponent('lib2'),
   })
@@ -106,12 +109,12 @@ test(`
         ├── lib1
         └── lib2
 `, () => {
-  mockFs({
-    ...mockComponent('app1', 'lib1', 'lib2'),
-    ...mockComponent('app2', 'lib1', 'lib2'),
+  vol.fromJSON({
+    ...mockComponent('app1', ['lib1', 'lib2']),
+    ...mockComponent('app2', ['lib1', 'lib2']),
     ...mockComponent('lib1'),
     ...mockComponent('lib2'),
-    ...mockComponent('tests1', 'app1', 'app2'),
+    ...mockComponent('tests1', ['app1', 'app2']),
   })
 
   const graph = generateDepGraph(process.cwd())
@@ -146,15 +149,15 @@ test(`
         └── lib3
             └── lib2
 `, () => {
-  mockFs({
-    ...mockComponent('a/app1', 'lib1', 'lib3'),
-    ...mockComponent('b/app2', 'lib1', 'lib3'),
+  vol.fromJSON({
+    ...mockComponent('a/app1', ['lib1', 'lib3']),
+    ...mockComponent('b/app2', ['lib1', 'lib3']),
     ...mockComponent('c/app3'),
     ...mockComponent('d/lib1'),
     ...mockComponent('e/lib2'),
-    ...mockComponent('f/lib3', 'lib2'),
-    ...mockComponent('g/tests1', 'app1', 'app2'),
-    ...mockComponent('h/tests2', 'app2'),
+    ...mockComponent('f/lib3', ['lib2']),
+    ...mockComponent('g/tests1', ['app1', 'app2']),
+    ...mockComponent('h/tests2', ['app2']),
   })
 
   const graph = generateDepGraph(process.cwd())
@@ -180,10 +183,8 @@ test(`
 })
 
 test('missing Jenkinsfile in app1', () => {
-  mockFs({
-    app1: {
-      VERSION: '0.1.0\n',
-    },
+  vol.fromJSON({
+    'app1/VERSION': '0.1.0\n',
   })
 
   expect(() => {
@@ -192,15 +193,11 @@ test('missing Jenkinsfile in app1', () => {
 })
 
 test('missing Jenkinsfile in lib1', () => {
-  mockFs({
-    lib1: {
-      VERSION: '0.1.0\n',
-    },
-    app1: {
-      deps: 'lib1',
-      Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0\n',
-    },
+  vol.fromJSON({
+    'lib1/VERSION': '0.1.0\n',
+    'app1/deps': 'lib1',
+    'app1/Jenkinsfile': 'stage {}',
+    'app1/VERSION': '0.1.0\n',
   })
 
   expect(() => {
@@ -209,15 +206,11 @@ test('missing Jenkinsfile in lib1', () => {
 })
 
 test('missing VERSION', () => {
-  mockFs({
-    lib1: {
-      Jenkinsfile: 'stage {}',
-    },
-    app1: {
-      deps: 'lib1',
-      Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0\n',
-    },
+  vol.fromJSON({
+    'lib1/Jenkinsfile': 'stage {}',
+    'app1/deps': 'lib1',
+    'app1/Jenkinsfile': 'stage {}',
+    'app1/VERSION': '0.1.0\n',
   })
 
   expect(() => {
@@ -226,12 +219,10 @@ test('missing VERSION', () => {
 })
 
 test('missing lib', () => {
-  mockFs({
-    app1: {
-      deps: 'lib1',
-      Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0\n',
-    },
+  vol.fromJSON({
+    'app1/deps': 'lib1',
+    'app1/Jenkinsfile': 'stage {}',
+    'app1/VERSION': '0.1.0\n',
   })
 
   expect(() => {
@@ -240,7 +231,7 @@ test('missing lib', () => {
 })
 
 test('do not include root', () => {
-  mockFs({
+  vol.fromJSON({
     VERSION: '0.1.0\n',
     Jenkinsfile: 'stage {}',
     ...mockComponent('app1'),
@@ -251,14 +242,10 @@ test('do not include root', () => {
 })
 
 test('ignore node_modules', () => {
-  mockFs({
-    app1: {
-      Jenkinsfile: 'stage {}',
-      VERSION: '0.1.0\n',
-      node_modules: {
-        ...mockComponent('app2'),
-      },
-    },
+  vol.fromJSON({
+    'app1/Jenkinsfile': 'stage {}',
+    'app1/VERSION': '0.1.0\n',
+    ...mockComponent('app1/node_modules/app2'),
   })
 
   const graph = generateDepGraph(process.cwd())

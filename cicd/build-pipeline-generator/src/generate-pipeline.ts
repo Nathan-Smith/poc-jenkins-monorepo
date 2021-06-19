@@ -1,6 +1,6 @@
 import { DepGraph } from 'dependency-graph'
 
-import { Component } from './gen-dep-graph'
+import { Component } from './generate-dep-graph'
 
 export interface ParallelStage {
   name: string

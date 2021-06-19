@@ -5,5 +5,5 @@
     "rootDir": ".",
     "noEmit": false
   },
-  "exclude": ["node_modules", "**/__tests__/**"]
+  "exclude": ["node_modules"]
 }

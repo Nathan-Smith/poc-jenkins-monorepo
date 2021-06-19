@@ -5,7 +5,7 @@ RUN apk add --update \
         git \
         make
 
-FROM dev as test
+FROM dev as build
 
 WORKDIR /opt/app
 
@@ -18,6 +18,8 @@ COPY . /opt/app/
 RUN npm run build &&\
   npm i -g
 
-FROM test as build-pipeline-generator
+FROM build as test
+
+FROM build as build-pipeline-generator
 
 ENTRYPOINT [ "build-pipeline-generator" ]

@@ -3,7 +3,7 @@ import Mustache from 'mustache'
 import path from 'path'
 import redent from 'redent'
 
-import { Pipeline } from './gen-pipeline'
+import { Pipeline } from './generate-pipeline'
 
 export default function generateJenkinsfile(pipeline: Pipeline): string {
   return Mustache.render(

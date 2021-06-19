@@ -1,81 +1,92 @@
-COMPOSE_RUN_DEV = docker-compose run --rm dev
-COMPOSE_RUN_DEV_DEBUG = docker-compose run --rm --service-ports dev
-COMPOSE_RUN_TEST = docker-compose run --rm test
-COMPOSE_RUN_BUILD_PIPELINE_GENERATOR = docker-compose run --rm build-pipeline-generator
+COMPOSE_BUILD_BUILD_PIPELINE_GENERATOR = docker-compose build build-pipeline-generator
+COMPOSE_BUILD_DEV = docker-compose build dev
+COMPOSE_BUILD_TEST = docker-compose build test
+COMPOSE_RUN_BUILD_PIPELINE_GENERATOR = $(COMPOSE_BUILD_BUILD_PIPELINE_GENERATOR); docker-compose run --rm build-pipeline-generator --verbose
+COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV); docker-compose run --rm dev $(1)
+COMPOSE_RUN_TEST = $(COMPOSE_BUILD_TEST); docker-compose run --rm $(2) test /bin/bash -c "$(SETUP_TESTS); $(1); $(TEARDOWN_TESTS)"
+SETUP_TESTS = rm -r /opt/app/src; cp -fr \$$WORKING_DIR/src /opt/app/; cd /opt/app
+TEARDOWN_TESTS = cp -fr /opt/app/src \$$WORKING_DIR/
 
 export WORKSPACE_PREFIX = /build
 export WORKING_DIR = $(WORKSPACE_PREFIX)$(shell echo "$(WORKSPACE)" | sed -e 's|^'$(AGENT_ROOT)'||')
 export WORKSPACE_MOUNT ?= ../..
+export VERBOSE ?= 0
+export JEST_ARGS ?=
 
 # Pipeline Targets
 
-ci: validate-lint validate-format validate-ts test validate-build-pipeline
+ci: check test build-pipeline-generator
 
 # Public Targets
 
-debug-tests:
-	$(COMPOSE_RUN_DEV_DEBUG) node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest --runInBand
+build-pipeline-generator:
+	$(MAKE) _clean-docker _start-jenkins
+	$(COMPOSE_RUN_BUILD_PIPELINE_GENERATOR) --validate
+	$(MAKE) _clean-docker
 
-deps: _npm-install
+check:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _run-lint _run-format _run-tsc)
+
+dev-deps:
+	$(COMPOSE_RUN_DEV) npm install
 
 dev-env:
-	docker-compose build dev
 	$(COMPOSE_RUN_DEV) /bin/bash
 
+fix-lint:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _fix-lint)
+
+_fix-lint:
+	npm run fix-lint
+
+fix-format:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _fix-format)
+
+_fix-format:
+	npm run fix-format
+
+run-lint:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _run-lint)
+
+_run-lint:
+	npm run lint
+
+run-format:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _run-format)
+
+_run-format:
+	npm run format
+
+run-tsc:
+	$(call COMPOSE_RUN_TEST, $(MAKE) _run-tsc)
+
+_run-tsc:
+	npx tsc
+
 test:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) npm run test
+	$(MAKE) _clean-docker _start-jenkins
+	$(call COMPOSE_RUN_TEST, $(MAKE) _test)
+	$(MAKE) _clean-docker
+
+_test:
+	npm run test -- $(JEST_ARGS)
+
+test-debugger:
+	$(MAKE) _clean-docker _start-jenkins
+	$(call COMPOSE_RUN_TEST, $(MAKE) _test-debugger, --service-ports)
+	$(MAKE) _clean-docker
+
+_test-debugger:
+	node --inspect-brk=0.0.0.0 -r ts-node/register node_modules/.bin/jest $(JEST_ARGS) --runInBand
 
 test-env:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) /bin/bash
-
-validate-lint:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) npm run lint
-
-validate-format:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) npm run format
-
-validate-ts:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) npx tsc
-
-pipeline:
-	docker-compose build build-pipeline-generator
-	$(COMPOSE_RUN_BUILD_PIPELINE_GENERATOR)
-
-validate-build-pipeline:
-	docker-compose build build-pipeline-generator
-	$(COMPOSE_RUN_BUILD_PIPELINE_GENERATOR) --validate
-
-npm-run-%:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npm run $*
-
-test-%:
-	docker-compose build test
-	$(COMPOSE_RUN_TEST) npm run test -- $*
-
-update-test-snapshots:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npm run test -- --updateSnapshot
-
-watch-tests:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npm run test -- --watch --updateSnapshot
-
-npm-install-%:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npm install -DE $*
+	$(call COMPOSE_RUN_TEST, /bin/bash)
 
 # Private Targets
 
-_npm-%:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npm $*
+_start-jenkins:
+	docker-compose build jenkins
+	docker-compose up -d jenkins
 
-_npx-%:
-	docker-compose build dev
-	$(COMPOSE_RUN_DEV) npx $*
+_clean-docker:
+	docker-compose down --remove-orphans

@@ -1,7 +1,7 @@
 import { DepGraph } from 'dependency-graph'
 
-import { Component } from '../gen-dep-graph'
-import generatePipeline from '../gen-pipeline'
+import { Component } from '../generate-dep-graph'
+import generatePipeline from '../generate-pipeline'
 
 test('empty graph', () => {
   const graph = new DepGraph<Component>()
