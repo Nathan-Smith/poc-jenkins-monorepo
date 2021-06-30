@@ -29,6 +29,7 @@ function setup {
 function tearDown {
   popd
   rm -rf ./test-repo
+  rm -rf ./test-repo-detached
 
   echo "${test_results[-1]}"
   echo "--------------------"
@@ -40,9 +41,17 @@ function detach {
   local detached_no_local=$3
 
   if [[ "$detached_no_local" == "true" ]]; then
-    git checkout --detach $branch_type/testing-detection
-    git branch -m $base_branch origin/$base_branch
-    git branch -m $branch_type/testing-detection origin/$branch_type/testing-detection
+
+    local commit_sha=$(git rev-parse HEAD)
+
+    popd
+    mkdir ./test-repo-detached
+    pushd ./test-repo-detached
+
+    git init
+    git fetch --no-tags --force -- ../test-repo +refs/heads/$branch_type/testing-detection:refs/remotes/origin/$branch_type/testing-detection +refs/heads/$base_branch:refs/remotes/origin/$base_branch
+    git checkout -f $commit_sha
+
     export BRANCH_NAME=$branch_type/testing-detection
   fi
 }

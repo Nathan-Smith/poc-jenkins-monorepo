@@ -28,6 +28,12 @@ elif  [[ "$branch_type" == "bugfix" ]]; then
   else
     # Filter all branches 'connected' to the current branch by the current branch, the first in this list will be release/*
     merge_base="$(git show-branch | sed 's/\(]\|\^\|~\).*//' | grep "\*\|+" | grep -v "$current" | head -n1 | sed "s/^.*\[//")"
+
+    # For detached HEADs lookup the closest release branch ref
+    if [[ -z "$merge_base" ]]; then
+      verboseLog $(git show-branch release/\*)
+      merge_base="$(git show-branch release/\* | sed 's/\(]\|\^\|~\).*//' | sed "s/^.*\[//")"
+    fi
   fi
 fi
 
@@ -35,7 +41,7 @@ verboseLog "merge_base=$merge_base"
 
 if [[ -n "$merge_base" ]]; then
   # Check for local branches first, fallback to origin tracking branches
-  if [[ -n "$(git show-ref refs/heads/$merge_base)" || "$merge_base" == "HEAD" ]]; then
+  if [[ -n "$(git show-ref --verify $merge_base)" || -n "$(git show-ref refs/heads/$merge_base)" || "$merge_base" == "HEAD" ]]; then
     printf "$(git merge-base HEAD $merge_base)"
   else
     printf "$(git merge-base HEAD origin/$merge_base)"
