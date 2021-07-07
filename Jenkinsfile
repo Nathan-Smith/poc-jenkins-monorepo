@@ -23,6 +23,14 @@ pipeline {
           }
         }
 
+        stage('changelog') {
+          steps {
+            dir('cicd/changelog') {
+              sh 'make ci'
+            }
+          }
+        }
+
         stage('docker-repository-proxy') {
           steps {
             dir('cicd/docker-repository-proxy') {

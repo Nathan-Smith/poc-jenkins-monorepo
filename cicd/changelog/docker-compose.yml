@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    stdin_open: true
+    tty: true
+    init: true
+    ports:
+      - '9229:9229'
+    working_dir: /opt/app
+    volumes:
+      - .:/opt/app
+    environment:
+      VERBOSE: ${VERBOSE}
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    stdin_open: true
+    tty: true
+    init: true
+    ports:
+      - '9229:9229'
+    environment:
+      VERBOSE: ${VERBOSE}
+      JEST_ARGS: ${JEST_ARGS}
+      WORKING_DIR: ${WORKING_DIR}/cicd/changelog
+    working_dir: ${WORKING_DIR}/cicd/changelog
+    volumes:
+      - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
+  changelog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: changelog
+    working_dir: ${WORKING_DIR}
+    volumes:
+      - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}

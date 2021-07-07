@@ -1,0 +1,7 @@
+stage('changelog') {
+  steps {
+    dir('cicd/changelog') {
+      sh 'make ci'
+    }
+  }
+}

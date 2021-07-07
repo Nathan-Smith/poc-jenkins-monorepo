@@ -19,6 +19,9 @@ bootstrap:
 build-pipeline-generator:
 	cd cicd/build-pipeline-generator && $(MAKE) build-pipeline-generator
 
+changelog:
+	cd cicd/changelog && $(MAKE) changelog
+
 validate-version:
 	cd cicd/validate-version && $(MAKE) validate-version
 

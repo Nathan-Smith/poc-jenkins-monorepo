@@ -1,0 +1,24 @@
+# Changelog
+
+{{#tags}}
+## [{{name}}]{{#tagDate}} - {{tagDate}}{{/tagDate}}
+  {{#ifContainsBugfixes}}
+### Bug Fixes
+    {{#bugfixCommits}}
+ - {{#scope}}**{{.}}** {{/scope}}{{{description}}}{{#hashShort}} ([{{hashShort}}]){{/hashShort}}
+    {{/bugfixCommits}}
+  {{/ifContainsBugfixes}}
+  {{#ifContainsFeatures}}
+### Features
+    {{#featureCommits}}
+ - {{#scope}}**{{.}}** {{/scope}}{{{description}}}{{#hashShort}} ([{{hashShort}}]){{/hashShort}}
+    {{/featureCommits}}
+  {{/ifContainsFeatures}}
+
+{{/tags}}
+{{#tags}}
+[{{name}}]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/{{prevRef}}...{{ref}}
+  {{#commits}}
+{{#hashShort}}[{{hashShort}}]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/{{hashFull}}{{/hashShort}}
+  {{/commits}}
+{{/tags}}
