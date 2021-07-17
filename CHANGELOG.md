@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### Features
- - Run Lint on Dockerfiles
+ - Update Jenkins to 2.289.2
+ - Run Lint on Dockerfiles ([2d971dc0])
  - Generate CHANGELOG.md from Git following Conventional Commits ([08e94856])
  - Validate Jenkinsfile Template ([54e7664b])
  - build-pipeline-generator now validates Jenkinsfile files with Jenkins ([a4e42866])
@@ -66,6 +67,7 @@
 
 [Unreleased]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...HEAD
 
+[2d971dc0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/2d971dc0c667bdab486b7176f0ccf70678f37eee
 [08e94856]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/08e9485600a281dce533ead239c97d1b995c0676
 [54e7664b]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/54e7664b16559194c83052ce498d487f065ee26f
 [a4e42866]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4e428665256951f79e75af32a5e86c332d8d404

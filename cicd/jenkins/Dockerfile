@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.277.3-lts-alpine
+FROM jenkins/jenkins:2.289.2-lts-alpine
 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt --latest false &&\
