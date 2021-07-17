@@ -1,10 +1,11 @@
 FROM node:15.13.0-alpine3.13 as dev
 
-RUN apk add --update \
-        bash \
-        findutils \
-        git \
-        make
+RUN apk add --no-cache \
+    bash=5.1.0-r0	\
+    findutils=4.8.0-r0 \
+    git=2.30.2-r0	\
+    make=4.3-r0 &&\
+  rm -rf /var/cache/apk/*
 
 FROM dev as test
 

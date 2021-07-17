@@ -10,9 +10,14 @@ export WORKSPACE_MOUNT ?= ../..
 
 # Pipeline Targets
 
-ci: test validate-version
+ci: check test validate-version
 
 # Public Targets
+
+check: run-lint
+
+run-lint:
+	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 
 test:
 	docker-compose build test

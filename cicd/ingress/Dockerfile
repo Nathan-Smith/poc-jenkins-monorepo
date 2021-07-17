@@ -1,7 +1,9 @@
 # Modified from: https://raw.githubusercontent.com/smallstep/certificates/d4e9812a98017c07dcdceac2cab5186771bed05e/examples/docker/nginx/Dockerfile
 FROM jwilder/nginx-proxy:0.9.0-alpine
 
-RUN apk add inotify-tools
+RUN apk add --no-cache \
+    inotify-tools=3.20.11.0-r0
+
 COPY certwatch.sh /
 COPY entrypoint.sh /
 

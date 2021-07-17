@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### Features
- - Generate CHANGELOG.md from Git following Conventional Commits
+ - Run Lint on Dockerfiles
+ - Generate CHANGELOG.md from Git following Conventional Commits ([08e94856])
  - Validate Jenkinsfile Template ([54e7664b])
  - build-pipeline-generator now validates Jenkinsfile files with Jenkins ([a4e42866])
 
@@ -65,6 +66,7 @@
 
 [Unreleased]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...HEAD
 
+[08e94856]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/08e9485600a281dce533ead239c97d1b995c0676
 [54e7664b]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/54e7664b16559194c83052ce498d487f065ee26f
 [a4e42866]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4e428665256951f79e75af32a5e86c332d8d404
 [0f1b8e6e]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/0f1b8e6ee1127a799666307d615a82b2d8036741
