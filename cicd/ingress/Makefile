@@ -10,10 +10,8 @@ ci: check build-image push-image
 build-image:
 	docker build -t $(IMAGE_TAG) .
 
-check: run-lint
+check:
+	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 
 push-image:
 	docker push $(IMAGE_TAG)
-
-run-lint:
-	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile

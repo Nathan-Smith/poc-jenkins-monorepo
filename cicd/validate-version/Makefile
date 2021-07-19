@@ -14,9 +14,7 @@ ci: check test validate-version
 
 # Public Targets
 
-check: run-lint
-
-run-lint:
+check:
 	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 
 test:

@@ -23,6 +23,7 @@ changelog:
 	$(COMPOSE_RUN_CHANGELOG)
 
 check:
+	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 	$(call COMPOSE_RUN_TEST, $(MAKE) _run-lint _run-format _run-tsc)
 
 dev-deps:
@@ -44,7 +45,6 @@ _fix-format:
 	npm run fix-format
 
 run-lint:
-	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 	$(call COMPOSE_RUN_TEST, $(MAKE) _run-lint)
 
 _run-lint:

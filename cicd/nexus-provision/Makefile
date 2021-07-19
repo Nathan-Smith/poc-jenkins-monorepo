@@ -29,7 +29,8 @@ build:
 build-image:
 	docker build -t $(IMAGE_TAG) .
 
-check: run-lint
+check:
+	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 
 push-image:
 	docker push $(IMAGE_TAG)
@@ -42,9 +43,6 @@ test: _clean-docker _start-nexus
 	$(MAKE) _test-npm
 	$(MAKE) _clean-docker
 .PHONY: test
-
-run-lint:
-	docker run --rm -i hadolint/hadolint:v2.6.0-alpine < Dockerfile
 
 # Private Targets
 
