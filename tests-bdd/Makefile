@@ -21,7 +21,7 @@ dev-env:
 
 test:
 	$(MAKE) _clean-docker _start-chrome
-	$(COMPOSE_RUN_DEV) /bin/bash
+	$(COMPOSE_RUN_TEST) ./gradlew test
 	$(MAKE) _clean-docker
 
 test-env:

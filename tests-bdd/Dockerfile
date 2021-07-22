@@ -11,4 +11,4 @@ FROM dev as test
 
 COPY *.gradle.kts ./
 
-RUN ./gradlew build
+RUN ./gradlew test
