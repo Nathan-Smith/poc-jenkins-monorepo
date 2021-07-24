@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: Dockerfile
       target: test
-    working_dir: ${WORKING_DIR}/tests-bdd
+    working_dir: ${WORKING_DIR}/tests-web-ui
     volumes:
       - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
   calculator-app:

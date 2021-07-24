@@ -1,4 +1,4 @@
-stage("tests-bdd") {
+stage("tests-web-ui") {
   steps {
     echo "Component... tests1"
   }
