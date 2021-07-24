@@ -16,6 +16,8 @@ services:
     working_dir: ${WORKING_DIR}/tests-bdd
     volumes:
       - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
+  calculator-app:
+    image: docker-repository-127-0-0-1.nip.io/calculator-app:0.1.0-dev.0
   chrome:
     image: selenium/standalone-chrome:3.141.59
     volumes:

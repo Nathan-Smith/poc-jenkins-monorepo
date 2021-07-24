@@ -1,5 +1,5 @@
 COMPOSE_BUILD_DEV = docker-compose build dev
-COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV); docker-compose run --service-ports --rm dev
+COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV) && docker-compose run --service-ports --rm dev
 
 VERSION :=$(file < VERSION)
 IMAGE_TAG :=docker-repository-127-0-0-1.nip.io/calculator-app:$(VERSION)

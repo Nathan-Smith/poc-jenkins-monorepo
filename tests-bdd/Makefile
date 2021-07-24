@@ -20,16 +20,19 @@ dev-env:
 	$(COMPOSE_RUN_DEV) /bin/bash
 
 test:
-	$(MAKE) _clean-docker _start-chrome
+	$(MAKE) _clean-docker _start-chrome _start-calculator-app
 	$(COMPOSE_RUN_TEST) ./gradlew test
 	$(MAKE) _clean-docker
 
 test-env:
-	$(MAKE) _clean-docker _start-chrome
+	$(MAKE) _clean-docker _start-chrome _start-calculator-app
 	$(COMPOSE_RUN_TEST) /bin/bash
 	$(MAKE) _clean-docker
 
 # Private Targets
+
+_start-calculator-app:
+	docker-compose up -d calculator-app
 
 _start-chrome:
 	docker-compose build chrome
