@@ -1,6 +1,6 @@
-stage('app1') {
+stage('calculator-app') {
   steps {
-    dir('app1') {
+    dir('calculator-app') {
       sh 'make ci'
     }
   }

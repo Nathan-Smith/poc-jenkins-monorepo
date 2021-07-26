@@ -1,5 +1,7 @@
 stage("tests-web-ui") {
   steps {
-    echo "Component... tests1"
+    dir('tests-web-ui') {
+      sh 'make ci'
+    }
   }
 }

@@ -16,3 +16,20 @@ services:
       - .:/opt/app
     environment:
       VERBOSE: ${VERBOSE}
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: test
+    stdin_open: true
+    tty: true
+    init: true
+    ports:
+      - '9229:9229'
+    environment:
+      VERBOSE: ${VERBOSE}
+      JEST_ARGS: ${JEST_ARGS}
+      WORKING_DIR: ${WORKING_DIR}/calculator-app
+    working_dir: ${WORKING_DIR}/calculator-app
+    volumes:
+      - ${WORKSPACE_MOUNT}:${WORKSPACE_PREFIX}
