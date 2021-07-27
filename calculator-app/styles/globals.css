@@ -1,3 +1,9 @@
+:root {
+  --primary-500-color: #6200EE;
+  --on-primary-high-emphasis-color: #FFF;
+  --outline-color: rgba(0, 0, 0, 0.12);
+}
+
 html,
 body {
   padding: 0;
