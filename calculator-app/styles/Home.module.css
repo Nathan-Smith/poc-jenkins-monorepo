@@ -1,17 +1,88 @@
+
 .main {
   height: 100vh;
   display: grid;
-  gap: 16px;
-  grid-template-columns: 1fr repeat(12, 72px) 1fr;
+  gap: 8px;
+  margin-left: 16px;
+  margin-right: 16px;
+  grid-template-columns: repeat(4, auto);
   grid-template-rows: 1fr repeat(5, 56px) 1fr;
   grid-template-areas:
-    ". . . . . . . . . . . . . ."
-    ". . . . . result result result result . . . . ."
-    ". . . . . keypad-1 keypad-2 keypad-3 . . . . . ."
-    ". . . . . keypad-4 keypad-5 keypad-6 . . . . . ."
-    ". . . . . keypad-7 keypad-8 keypad-9 keypad-add . . . . ."
-    ". . . . . . keypad-0 keypad-decimal keypad-equal . . . . ."
-    ". . . . . . . . . . . . . .";
+    ". . . ."
+    "result result result result"
+    "keypad-1 keypad-2 keypad-3 ."
+    "keypad-4 keypad-5 keypad-6 ."
+    "keypad-7 keypad-8 keypad-9 keypad-add"
+    ". keypad-0 keypad-decimal keypad-equal"
+    " . . . .";
+}
+
+@media (min-width: 600px) {
+  .main {
+    gap: 8px;
+    margin-left: 32px;
+    margin-right: 32px;
+    grid-template-columns: repeat(8, auto);
+    grid-template-areas:
+    ". . . . . . . ."
+    ". . result result result result . ."
+    ". . keypad-1 keypad-2 keypad-3 . . ."
+    ". . keypad-4 keypad-5 keypad-6 . . ."
+    ". . keypad-7 keypad-8 keypad-9 keypad-add . ."
+    ". . . keypad-0 keypad-decimal keypad-equal . ."
+    " . . . . . . . .";
+  }
+}
+
+@media (min-width: 905px) {
+  .main {
+    gap: 12px;
+    margin-left: initial;
+    margin-right: initial;
+    grid-template-columns: 1fr repeat(12, 59px) 1fr;
+    grid-template-areas:
+      ". . . . . . . . . . . . . ."
+      ". . . . . result result result result . . . . ."
+      ". . . . . keypad-1 keypad-2 keypad-3 . . . . . ."
+      ". . . . . keypad-4 keypad-5 keypad-6 . . . . . ."
+      ". . . . . keypad-7 keypad-8 keypad-9 keypad-add . . . . ."
+      ". . . . . . keypad-0 keypad-decimal keypad-equal . . . . ."
+      ". . . . . . . . . . . . . .";
+  }
+}
+
+@media (min-width: 1240px) {
+  .main {
+    gap: 16px;
+    margin-left: 200px;
+    margin-right: 200px;
+    grid-template-columns: repeat(12, auto);
+    grid-template-areas:
+      ". . . . . . . . . . . ."
+      ". . . . result result result result . . . ."
+      ". . . . keypad-1 keypad-2 keypad-3 . . . . ."
+      ". . . . keypad-4 keypad-5 keypad-6 . . . . ."
+      ". . . . keypad-7 keypad-8 keypad-9 keypad-add . . . ."
+      ". . . . . keypad-0 keypad-decimal keypad-equal . . . ."
+      ". . . . . . . . . . . .";
+  }
+}
+
+@media (min-width: 1440px) {
+  .main {
+    gap: 16px;
+    margin-left: initial;
+    margin-right: initial;
+    grid-template-columns: 1fr repeat(12, 72px) 1fr;
+    grid-template-areas:
+      ". . . . . . . . . . . . . ."
+      ". . . . . result result result result . . . . ."
+      ". . . . . keypad-1 keypad-2 keypad-3 . . . . . ."
+      ". . . . . keypad-4 keypad-5 keypad-6 . . . . . ."
+      ". . . . . keypad-7 keypad-8 keypad-9 keypad-add . . . . ."
+      ". . . . . . keypad-0 keypad-decimal keypad-equal . . . . ."
+      ". . . . . . . . . . . . . .";
+  }
 }
 
 .result {
