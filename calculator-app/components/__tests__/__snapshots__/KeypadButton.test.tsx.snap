@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KeypadButton renders 1`] = `
+<button
+  className="mdc-button mdc-button--outlined keypadButton"
+  style={
+    Object {
+      "gridArea": "a",
+    }
+  }
+>
+  <span
+    className="mdc-button__ripple"
+  />
+  <span
+    className="mdc-button__label"
+  >
+    a
+  </span>
+</button>
+`;

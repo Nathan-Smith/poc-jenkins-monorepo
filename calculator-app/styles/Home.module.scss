@@ -1,3 +1,5 @@
+@use "@material/button";
+@use "@material/ripple";
 
 .main {
   height: 100vh;
@@ -86,8 +88,8 @@
 }
 
 .result {
-  background-color: var(--primary-500-color);
-  color: var(--on-primary-high-emphasis-color);
+  background-color: var(--mdc-theme-primary);
+  color: var(--mdc-theme-on-primary);
   grid-area: result;
   font-size: 34px;
   line-height: 36px;
@@ -100,102 +102,9 @@
 }
 
 .keypadButton {
-  border-radius: 4px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  font-weight: bold;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: 1.25px;
-  user-select: none;
-}
-
-.buttonOutlined {
-  composes: keypadButton;
-  border: 1px solid var(--outline-color);
-  color: var(--primary-500-color);
-}
-
-.buttonOutlined:hover {
-  background-color: var(--states-primary-overlay-hover);
-}
-
-.keypad_1 {
-  composes: buttonOutlined;
-  grid-area: keypad-1;
-}
-
-.keypad_2 {
-  composes: buttonOutlined;
-  grid-area: keypad-2;
-}
-
-.keypad_3 {
-  composes: buttonOutlined;
-  grid-area: keypad-3;
-}
-
-.keypad_4 {
-  composes: buttonOutlined;
-  grid-area: keypad-4;
-}
-
-.keypad_5 {
-  composes: buttonOutlined;
-  grid-area: keypad-5;
-}
-
-.keypad_6 {
-  composes: buttonOutlined;
-  grid-area: keypad-6;
-}
-
-.keypad_7 {
-  composes: buttonOutlined;
-  grid-area: keypad-7;
-}
-
-.keypad_8 {
-  composes: buttonOutlined;
-  grid-area: keypad-8;
-}
-
-.keypad_9 {
-  composes: buttonOutlined;
-  grid-area: keypad-9;
-}
-
-.keypadAdd {
-  composes: buttonOutlined;
-  grid-area: keypad-add;
-}
-
-.keypad_0 {
-  composes: buttonOutlined;
-  grid-area: keypad-0;
-}
-
-.keypadDecimal {
-  composes: buttonOutlined;
-  grid-area: keypad-decimal;
+  @include button.height(100%);
 }
 
 .keypadEqual {
-  background-color: var(--primary-500-color);
-  color: var(--on-primary-high-emphasis-color);
-  composes: keypadButton;
-  grid-area: keypad-equal;
-  border-radius: 4px 4px 16px 4px;
-  position: relative;
+  @include button.shape-radius(4px 4px 16px 4px);
 }
-
-.keypadEqual:hover::after {
-  content:'\A';
-  position: absolute;
-  width:100%; height:100%;
-  top:0;
-  left:0;
-  background:rgba(255, 255, 255, 0.04);
-}
-

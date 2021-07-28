@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KeypadEqual renders 1`] = `
+<button
+  className="mdc-button mdc-button--raised keypadButton keypadEqual"
+  style={
+    Object {
+      "gridArea": "keypad-equal",
+      "overflow": "hidden",
+    }
+  }
+>
+  <span
+    className="mdc-button__ripple"
+  />
+  <span
+    className="mdc-button__label"
+  >
+    =
+  </span>
+</button>
+`;

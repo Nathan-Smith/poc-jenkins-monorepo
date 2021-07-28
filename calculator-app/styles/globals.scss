@@ -1,8 +1,8 @@
+@use "@material/button/styles";
+
 :root {
-  --primary-500-color: #6200EE;
-  --on-primary-high-emphasis-color: #FFF;
-  --outline-color: rgba(0, 0, 0, 0.12);
-  --states-primary-overlay-hover: rgba(98, 0, 238, 0.04);
+  --mdc-theme-primary: #6200EE;
+  --mdc-theme-on-primary: #FFF;
 }
 
 html,

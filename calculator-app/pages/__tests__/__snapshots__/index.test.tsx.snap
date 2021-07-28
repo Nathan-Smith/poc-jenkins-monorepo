@@ -1,101 +1,235 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`a 1`] = `
-<div
-  className="container"
+exports[`index renders 1`] = `
+<main
+  className="main"
 >
-  <main
-    className="main"
+  <div
+    className="result"
   >
-    <h1
-      className="title"
-    >
-      Welcome to 
-      <a
-        href="https://nextjs.org"
-      >
-        Next.js!
-      </a>
-    </h1>
-    <p
-      className="description"
-    >
-      Get started by editing
-       
-      <code
-        className="code"
-      >
-        pages/index.js
-      </code>
-    </p>
-    <div
-      className="grid"
-    >
-      <a
-        className="card"
-        href="https://nextjs.org/docs"
-      >
-        <h2>
-          Documentation →
-        </h2>
-        <p>
-          Find in-depth information about Next.js features and API.
-        </p>
-      </a>
-      <a
-        className="card"
-        href="https://nextjs.org/learn"
-      >
-        <h2>
-          Learn →
-        </h2>
-        <p>
-          Learn about Next.js in an interactive course with quizzes!
-        </p>
-      </a>
-      <a
-        className="card"
-        href="https://github.com/vercel/next.js/tree/master/examples"
-      >
-        <h2>
-          Examples →
-        </h2>
-        <p>
-          Discover and deploy boilerplate example Next.js projects.
-        </p>
-      </a>
-      <a
-        className="card"
-        href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      >
-        <h2>
-          Deploy →
-        </h2>
-        <p>
-          Instantly deploy your Next.js site to a public URL with Vercel.
-        </p>
-      </a>
-    </div>
-  </main>
-  <footer
-    className="footer"
+    42
+  </div>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-1",
+      }
+    }
   >
-    <a
-      href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      rel="noopener noreferrer"
-      target="_blank"
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
     >
-      Powered by
-       
-      <span
-        className="logo"
-      >
-        <img
-          alt="Vercel Logo"
-          src="/vercel.svg"
-        />
-      </span>
-    </a>
-  </footer>
-</div>
+      1
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-2",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      2
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-3",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      3
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-4",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      4
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-5",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      5
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-6",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      6
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-7",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      7
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-8",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      8
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-9",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      9
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-add",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      +
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-0",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      0
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    style={
+      Object {
+        "gridArea": "keypad-decimal",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      .
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--raised keypadButton keypadEqual"
+    style={
+      Object {
+        "gridArea": "keypad-equal",
+        "overflow": "hidden",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      =
+    </span>
+  </button>
+</main>
 `;

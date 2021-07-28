@@ -1,6 +1,6 @@
 COMPOSE_BUILD_DEV = docker-compose build dev
 COMPOSE_BUILD_TEST = docker-compose build test
-COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV) && docker-compose run --service-ports --rm dev
+COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV) && docker-compose run $(2) --rm dev $(1)
 COMPOSE_RUN_TEST = $(COMPOSE_BUILD_TEST); docker-compose run --rm $(2) test /bin/bash -c "$(SETUP_TESTS) && $(1); $(TEARDOWN_TESTS)"
 SETUP_TESTS = rsync -a \$$WORKING_DIR/ /opt/app --exclude node_modules --exclude package.json --exclude package-lock.json && cd /opt/app
 TEARDOWN_TESTS = rsync -a /opt/app/ \$$WORKING_DIR --exclude node_modules --exclude package.json --exclude package-lock.json
@@ -52,6 +52,9 @@ push-image:
 
 require-build:
 	@docker manifest inspect $(IMAGE_TAG) > /dev/null 2>&1 && echo "NO" || echo "YES"
+
+run-dev:
+	$(call COMPOSE_RUN_DEV, npm run dev, --service-ports)
 
 run-image:
 	docker run -p 3000:3000 $(IMAGE_TAG)
