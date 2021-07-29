@@ -1,5 +1,6 @@
 @use "@material/button";
 @use "@material/ripple";
+@use "@material/textfield";
 
 .main {
   height: 100vh;
@@ -88,17 +89,21 @@
 }
 
 .result {
-  background-color: var(--mdc-theme-primary);
-  color: var(--mdc-theme-on-primary);
-  grid-area: result;
-  font-size: 34px;
-  line-height: 36px;
-  border-radius: 16px 4px 4px 4px;
-  justify-content: flex-end;
-  align-items: center;
-  display: flex;
-  padding-right: 8px;
-  padding-left: 8px;
+  // background-color: var(--mdc-theme-primary);
+  // color: var(--mdc-theme-on-primary);
+  // grid-area: result;
+  // font-size: 34px;
+  // line-height: 36px;
+  // border-radius: 16px 4px 4px 4px;
+  // justify-content: flex-end;
+  // align-items: center;
+  // display: flex;
+  // padding-right: 8px;
+  // padding-left: 8px;
+  // @include textfield.fill-color(var(--mdc-theme-primary));
+  // @include textfield.ink-color(var(--mdc-theme-on-primary));
+  // @include textfield.caret-color(var(--mdc-theme-on-primary));
+  @include textfield.shape-radius(16px 4px);
 }
 
 .keypadButton {
