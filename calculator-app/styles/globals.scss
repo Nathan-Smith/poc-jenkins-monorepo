@@ -3,6 +3,7 @@
 @use "@material/line-ripple/mdc-line-ripple";
 @use "@material/notched-outline/mdc-notched-outline";
 @use "@material/textfield";
+@use "@material/typography/mdc-typography";
 
 @include textfield.core-styles;
 

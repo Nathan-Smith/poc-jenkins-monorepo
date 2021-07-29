@@ -1,6 +1,7 @@
 @use "@material/button";
 @use "@material/ripple";
 @use "@material/textfield";
+@use "@material/typography";
 
 .main {
   height: 100vh;
@@ -104,6 +105,10 @@
   // @include textfield.ink-color(var(--mdc-theme-on-primary));
   // @include textfield.caret-color(var(--mdc-theme-on-primary));
   @include textfield.shape-radius(16px 4px);
+}
+
+.resultInput {
+  @include typography.typography(headline4);//
 }
 
 .keypadButton {

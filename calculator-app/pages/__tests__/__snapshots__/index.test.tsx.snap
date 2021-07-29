@@ -4,11 +4,28 @@ exports[`index renders 1`] = `
 <main
   className="main"
 >
-  <div
-    className="result"
+  <label
+    className="mdc-text-field mdc-text-field--filled mdc-text-field--end-aligned result"
+    style={
+      Object {
+        "gridArea": "result",
+      }
+    }
   >
-    42
-  </div>
+    <span
+      className="mdc-text-field__ripple"
+    />
+    <input
+      className="mdc-text-field__input resultInput"
+      data-testid="result-input"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+    <span
+      className="mdc-line-ripple"
+    />
+  </label>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
     style={
