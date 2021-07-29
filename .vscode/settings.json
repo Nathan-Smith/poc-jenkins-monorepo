@@ -11,7 +11,8 @@
         "parallelisation",
         "popd",
         "pushd",
-        "redent"
+        "redent",
+        "testid"
     ],
     "eslint.format.enable": true
 }
