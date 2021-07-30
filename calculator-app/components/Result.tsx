@@ -25,8 +25,8 @@ export function Result(): JSX.Element {
         type="text"
         value={value}
         onChange={(e) => {
-          const [sign = '', whole = '', decimal = '', fractional = ''] =
-            e.target.value.match(/^(-?)(\d*)(\.\d*)?.*/gm) ?? []
+          const [_, sign = '', whole = '', decimal = '', fractional = ''] =
+            e.target.value.match(/^(-?)(\d*)((?:\.\d*)?).*/) ?? []
           setValue(`${sign}${whole}${decimal}${fractional}`)
         }}
       />
