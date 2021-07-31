@@ -206,7 +206,7 @@ export default async function changelog(): Promise<void> {
                   featureCommits: featureCommits,
                   ifContainsBugfixes: bugfixCommits.length > 0,
                   bugfixCommits: bugfixCommits,
-                  commits,
+                  commits: [...featureCommits, ...bugfixCommits],
                 }
               })
           )

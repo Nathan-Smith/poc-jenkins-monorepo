@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### Bug Fixes
- - package.json version and CHANGELOG
+ - CHANGELOG including release commits in link list
+ - package.json version and CHANGELOG ([3b00278c])
 ### Features
  - Update npm to 7.20.0 ([9dd0b8cc])
  - Update Jenkins to 2.289.2 ([25802d65])
@@ -69,19 +70,15 @@
  - Add Comments to Jenkinsfile ([fc9f1f2c])
 
 [Unreleased]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...HEAD
-
-[6e8037f3]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/6e8037f39d3e3187ed44a8f491490361f6aac33f
 [9dd0b8cc]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/9dd0b8ccc7a1f5e61949874dc17ef344857ff309
 [25802d65]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/25802d6528fdb52c0811a29698e95cc95c67e52f
 [2d971dc0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/2d971dc0c667bdab486b7176f0ccf70678f37eee
 [08e94856]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/08e9485600a281dce533ead239c97d1b995c0676
 [54e7664b]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/54e7664b16559194c83052ce498d487f065ee26f
 [a4e42866]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4e428665256951f79e75af32a5e86c332d8d404
-[0f1b8e6e]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/0f1b8e6ee1127a799666307d615a82b2d8036741
+
+[3b00278c]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/3b00278ce865b229a0f9a59a5afeb6c6f1ba981f
 [v0.5.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.4.0...v0.5.0
-[824748f4]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/824748f4e7cca2f61351b67ead46bb85fffcacce
-[286fc7ac]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/286fc7acd57c2028280f5dda7a54e77b6616e143
-[d60ce711]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/d60ce711d99f860400ddbcf0e5311dd5f18d20f4
 [6cef837f]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/6cef837f2ad7f52db051df36d2f852d8135443eb
 [7a49215c]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/7a49215c455820f66a17be561517d4db19e6290a
 [df2553d5]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/df2553d581e5e4ed21feffe08970dff7e0e8c155
@@ -90,28 +87,23 @@
 [897bea1f]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/897bea1f368b3f6afcd51e9d660abc3a1a84cb34
 [0f6f8292]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/0f6f82924d942ca50a7044f3f307828d7d779b41
 [7e6cfa56]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/7e6cfa5600f3ad2f6c1f0612df2812da2dce20f5
-[5ceaf76d]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/5ceaf76d0857569cc45bf1c7c2f31ec6007eeab6
+[286fc7ac]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/286fc7acd57c2028280f5dda7a54e77b6616e143
 [v0.4.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.3.2...v0.4.0
-[57c0a4a0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/57c0a4a06c477acce715f3f622e701253be29c34
-[7ad127b7]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/7ad127b7c8323abbf2b8429702b149f5b340af6c
 [32e92cc2]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/32e92cc225855bd561a34dab14f225660b3ac667
 [c18f2a79]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/c18f2a79a10b4a3430f963b2026dd237f1e43258
 [c8ea5853]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/c8ea5853f7c370675ec25efd88402c8978f752c1
 [e8e393da]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/e8e393dae8451c139be598a2bc7b2eac96b4eeda
-[68840352]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/68840352e5460880794f464da24a0a76488adf3c
 [v0.3.2]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.3.1...v0.3.2
 [43966027]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/43966027eab035600d70036f89dee3647b153ce2
 [v0.3.1]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.3.0...v0.3.1
 [8f36ff0f]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/8f36ff0fe30a51a1849f7bb703d2cdd211fa850f
 [v0.3.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.2.3...v0.3.0
-[093e8b83]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/093e8b83c5bfa6675825832737360353475b9d60
-[a4a626fb]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4a626fb9b464522df310155ff230934fb1d94c0
-[9d20ed8d]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/9d20ed8d47d3b3b4971dd729f0d466a46c7f0dfe
 [2e91bf85]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/2e91bf8527ac8c2f0ef9a6cfcf34f0712ed9260b
 [b3297338]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/b32973383da3decfc0bddd3a030863e292dada3c
 [065c6128]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/065c61282925817061e9fc4728038372fb032e5a
 [750178ac]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/750178acb9d5c36ef171500367ea5d091d003437
 [75447e97]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/75447e977407e0861f076d34d00e5f43b1a1380a
+[a4a626fb]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4a626fb9b464522df310155ff230934fb1d94c0
 [v0.2.3]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.2.2...v0.2.3
 [7f47d72d]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/7f47d72de4f0a795313a805e0dfc51a57a2b4733
 [v0.2.2]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.2.1...v0.2.2
@@ -119,8 +111,6 @@
 [v0.2.1]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.2.0...v0.2.1
 [400ba91f]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/400ba91f189fb8a5c7f2ba5b8e4ce182454c5dd2
 [v0.2.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.1.0...v0.2.0
-[7576bf8c]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/7576bf8cd3d3aeb8530aa6a284edd900447815cf
-[838f8c03]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/838f8c036d1c5108c7560872d653f160aea77046
-[c72d51d8]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/c72d51d8b1c593a26bd624bd35a7acede5d73013
 [5ba3008d]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/5ba3008de25492d18160fa427398585c2502cb3d
 [fc9f1f2c]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/fc9f1f2c93c9fe354e0dfd2017d6c58857af9155
+[838f8c03]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/838f8c036d1c5108c7560872d653f160aea77046
