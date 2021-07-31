@@ -1,8 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### Bug Fixes
+ - package.json version and CHANGELOG
 ### Features
- - Update npm to 7.20.0
+ - Update npm to 7.20.0 ([9dd0b8cc])
  - Update Jenkins to 2.289.2 ([25802d65])
  - Run Lint on Dockerfiles ([2d971dc0])
  - Generate CHANGELOG.md from Git following Conventional Commits ([08e94856])
@@ -68,6 +70,8 @@
 
 [Unreleased]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...HEAD
 
+[6e8037f3]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/6e8037f39d3e3187ed44a8f491490361f6aac33f
+[9dd0b8cc]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/9dd0b8ccc7a1f5e61949874dc17ef344857ff309
 [25802d65]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/25802d6528fdb52c0811a29698e95cc95c67e52f
 [2d971dc0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/2d971dc0c667bdab486b7176f0ccf70678f37eee
 [08e94856]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/08e9485600a281dce533ead239c97d1b995c0676
