@@ -1,8 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [v0.6.0] - 2021-07-31
 ### Bug Fixes
- - CHANGELOG including release commits in link list
+ - CHANGELOG including release commits in link list ([e8eaa613])
  - package.json version and CHANGELOG ([3b00278c])
 ### Features
  - Update npm to 7.20.0 ([9dd0b8cc])
@@ -69,14 +69,14 @@
  - Git Workflow ([5ba3008d])
  - Add Comments to Jenkinsfile ([fc9f1f2c])
 
-[Unreleased]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...HEAD
+[v0.6.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.5.0...v0.6.0
 [9dd0b8cc]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/9dd0b8ccc7a1f5e61949874dc17ef344857ff309
 [25802d65]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/25802d6528fdb52c0811a29698e95cc95c67e52f
 [2d971dc0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/2d971dc0c667bdab486b7176f0ccf70678f37eee
 [08e94856]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/08e9485600a281dce533ead239c97d1b995c0676
 [54e7664b]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/54e7664b16559194c83052ce498d487f065ee26f
 [a4e42866]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/a4e428665256951f79e75af32a5e86c332d8d404
-
+[e8eaa613]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/e8eaa613b2ab2c3c75d309b5e5fbb928b1f09367
 [3b00278c]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/3b00278ce865b229a0f9a59a5afeb6c6f1ba981f
 [v0.5.0]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/compare/v0.4.0...v0.5.0
 [6cef837f]: https://github.com/Nathan-Smith/poc-jenkins-monorepo/commit/6cef837f2ad7f52db051df36d2f852d8135443eb

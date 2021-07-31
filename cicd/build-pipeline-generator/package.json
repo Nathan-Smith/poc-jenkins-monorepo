@@ -1,6 +1,6 @@
 {
   "name": "build-pipeline-generator",
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0",
   "description": "",
   "main": "./lib/index.js",
   "bin": {
