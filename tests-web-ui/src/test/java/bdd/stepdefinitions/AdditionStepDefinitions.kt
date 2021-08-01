@@ -22,7 +22,7 @@ class AdditionStepDefinitions {
     )
   }
 
-  @Then("{actor} should see {string} appear as the result")
+  @Then("{actor} should see {int} appear as the result")
   fun `should see result of`(actor: Actor, result: String) {
     actor.attemptsTo(
       that(Calculator.RESULT).hasText(result)

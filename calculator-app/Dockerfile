@@ -24,6 +24,8 @@ RUN npm ci
 
 FROM test as builder
 
+WORKDIR /opt/app
+
 COPY . .
 
 RUN npm run build

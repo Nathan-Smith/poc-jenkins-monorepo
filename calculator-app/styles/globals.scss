@@ -1,8 +1,6 @@
 @use "@material/button/styles";
 @use "@material/typography/mdc-typography";
 
-@include textfield.core-styles;
-
 :root {
   --mdc-theme-primary: #6200EE;
   --mdc-theme-on-primary: #FFF;

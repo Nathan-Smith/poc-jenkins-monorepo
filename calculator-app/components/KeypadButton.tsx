@@ -17,7 +17,8 @@ export function KeypadButton({
 
   return (
     <button
-      className={`mdc-button mdc-button--outlined ${styles.keypadButton}`}
+      data-testid="result-input"
+      className={`mdc-button mdc-button--outlined ${gridArea} ${styles.keypadButton}`}
       style={{ gridArea: gridArea }}
       ref={buttonRef}
     >
