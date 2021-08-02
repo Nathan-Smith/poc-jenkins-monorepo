@@ -4,30 +4,16 @@ exports[`index renders 1`] = `
 <main
   className="main"
 >
-  <label
-    className="mdc-text-field mdc-text-field--filled mdc-text-field--end-aligned result"
-    style={
-      Object {
-        "gridArea": "result",
-      }
-    }
+  <div
+    className="result result"
+    data-testid="result"
   >
-    <span
-      className="mdc-text-field__ripple"
-    />
-    <input
-      className="mdc-text-field__input resultInput"
-      data-testid="result-input"
-      onChange={[Function]}
-      type="text"
-      value=""
-    />
-    <span
-      className="mdc-line-ripple"
-    />
-  </label>
+    42
+  </div>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-1"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-1",
@@ -45,6 +31,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-2"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-2",
@@ -62,6 +50,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-3"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-3",
@@ -79,6 +69,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-4"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-4",
@@ -96,6 +88,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-5"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-5",
@@ -113,6 +107,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-6"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-6",
@@ -130,6 +126,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-7"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-7",
@@ -147,6 +145,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-8"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-8",
@@ -164,6 +164,8 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-9"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-9",
@@ -181,9 +183,11 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-decimal"
+    onClick={[Function]}
     style={
       Object {
-        "gridArea": "keypad-add",
+        "gridArea": "keypad-decimal",
       }
     }
   >
@@ -193,11 +197,13 @@ exports[`index renders 1`] = `
     <span
       className="mdc-button__label"
     >
-      +
+      .
     </span>
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-0"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-0",
@@ -215,9 +221,11 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-add"
+    onClick={[Function]}
     style={
       Object {
-        "gridArea": "keypad-decimal",
+        "gridArea": "keypad-add",
       }
     }
   >
@@ -227,15 +235,16 @@ exports[`index renders 1`] = `
     <span
       className="mdc-button__label"
     >
-      .
+      +
     </span>
   </button>
   <button
-    className="mdc-button mdc-button--raised keypadButton keypadEqual"
+    className="mdc-button mdc-button--raised keypadButton"
+    data-testid="keypad-equal"
+    onClick={[Function]}
     style={
       Object {
         "gridArea": "keypad-equal",
-        "overflow": "hidden",
       }
     }
   >

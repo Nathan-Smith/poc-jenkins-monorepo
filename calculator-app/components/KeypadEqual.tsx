@@ -1,23 +1,13 @@
-import { useEffect, useRef } from 'react';
-import styles from '../styles/Home.module.scss';
-import { MDCRipple } from '@material/ripple';
+import { KeypadButton, MDCButtonVariant } from './KeypadButton'
 
 export function KeypadEqual(): JSX.Element {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    if (buttonRef.current)
-      new MDCRipple(buttonRef.current);
-  }, [buttonRef]);
-
   return (
-    <button
-      className={`mdc-button mdc-button--raised ${styles.keypadButton} ${styles.keypadEqual}`}
-      style={{ gridArea: 'keypad-equal', overflow: 'hidden' }}
-      ref={buttonRef}
+    <KeypadButton
+      testid="keypad-equal"
+      gridArea="keypad-equal"
+      variant={MDCButtonVariant.raised}
     >
-      <span className="mdc-button__ripple" />
-      <span className="mdc-button__label">=</span>
-    </button>
-  );
+      =
+    </KeypadButton>
+  )
 }

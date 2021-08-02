@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`KeypadEqual renders 1`] = `
+exports[`Keypad6 renders 1`] = `
 <button
-  className="mdc-button mdc-button--raised keypadButton"
-  data-testid="keypad-equal"
+  className="mdc-button mdc-button--outlined keypadButton"
+  data-testid="keypad-6"
   onClick={[Function]}
   style={
     Object {
-      "gridArea": "keypad-equal",
+      "gridArea": "keypad-6",
     }
   }
 >
@@ -17,7 +17,7 @@ exports[`KeypadEqual renders 1`] = `
   <span
     className="mdc-button__label"
   >
-    =
+    6
   </span>
 </button>
 `;

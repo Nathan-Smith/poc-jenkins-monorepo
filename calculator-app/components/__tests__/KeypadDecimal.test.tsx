@@ -1,13 +1,13 @@
 import React from 'react'
 import renderer, { act, ReactTestRenderer } from 'react-test-renderer'
 
-import { Result } from '../Result'
+import { KeypadDecimal } from '../KeypadDecimal'
 
-describe('Result', () => {
-  test('renders', () => {
+describe('KeypadDecimal', () => {
+  test('renders', async () => {
     let component: ReactTestRenderer | undefined
     act(() => {
-      component = renderer.create(<Result value="42" />)
+      component = renderer.create(<KeypadDecimal/>)
     })
 
     expect(component?.toJSON()).toMatchSnapshot()

@@ -1,13 +1,13 @@
 import React from 'react'
 import renderer, { act, ReactTestRenderer } from 'react-test-renderer'
 
-import { Result } from '../Result'
+import { Keypad0 } from '../Keypad0'
 
-describe('Result', () => {
-  test('renders', () => {
+describe('Keypad0', () => {
+  test('renders', async () => {
     let component: ReactTestRenderer | undefined
     act(() => {
-      component = renderer.create(<Result value="42" />)
+      component = renderer.create(<Keypad0/>)
     })
 
     expect(component?.toJSON()).toMatchSnapshot()

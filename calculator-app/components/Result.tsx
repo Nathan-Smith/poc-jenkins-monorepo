@@ -1,5 +1,9 @@
 import styles from '../styles/Home.module.scss'
 
-export function Result(): JSX.Element {
-  return <div className={` ${styles.result}`}>42</div>
+export function Result({ value }: { value: string }): JSX.Element {
+  return (
+    <div data-testid="result" className={`result ${styles.result}`}>
+      {value}
+    </div>
+  )
 }

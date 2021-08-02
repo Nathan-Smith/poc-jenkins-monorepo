@@ -1,26 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Result renders 1`] = `
-<label
-  className="mdc-text-field mdc-text-field--filled mdc-text-field--end-aligned result"
-  style={
-    Object {
-      "gridArea": "result",
-    }
-  }
+<div
+  className="result result"
+  data-testid="result"
 >
-  <span
-    className="mdc-text-field__ripple"
-  />
-  <input
-    className="mdc-text-field__input resultInput"
-    data-testid="result-input"
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
-  <span
-    className="mdc-line-ripple"
-  />
-</label>
+  42
+</div>
 `;

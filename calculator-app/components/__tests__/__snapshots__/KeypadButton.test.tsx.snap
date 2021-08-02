@@ -3,9 +3,33 @@
 exports[`KeypadButton renders 1`] = `
 <button
   className="mdc-button mdc-button--outlined keypadButton"
+  data-testid="a-class-name"
+  onClick={[Function]}
   style={
     Object {
-      "gridArea": "a",
+      "gridArea": "a-grid-area",
+    }
+  }
+>
+  <span
+    className="mdc-button__ripple"
+  />
+  <span
+    className="mdc-button__label"
+  >
+    a
+  </span>
+</button>
+`;
+
+exports[`KeypadButton renders raised variant 1`] = `
+<button
+  className="mdc-button mdc-button--raised keypadButton"
+  data-testid="a-class-name"
+  onClick={[Function]}
+  style={
+    Object {
+      "gridArea": "a-grid-area",
     }
   }
 >

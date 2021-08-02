@@ -1,29 +1,42 @@
-import { useEffect, useRef } from 'react';
-import styles from '../styles/Home.module.scss';
-import { MDCRipple } from '@material/ripple';
+import { MDCRipple } from '@material/ripple'
+import { useEffect, useRef } from 'react'
+
+import styles from '../styles/Home.module.scss'
+
+export enum MDCButtonVariant {
+  outlined = 'outlined',
+  raised = 'raised',
+}
 
 export function KeypadButton({
-  gridArea, children,
+  children,
+  gridArea,
+  onClick,
+  testid,
+  variant = MDCButtonVariant.outlined,
 }: {
-  gridArea: string;
-  children: React.ReactNode;
+  children: React.ReactNode
+  gridArea: string
+  onClick?: () => void
+  testid: string
+  variant?: MDCButtonVariant
 }): JSX.Element {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (buttonRef.current)
-      new MDCRipple(buttonRef.current);
-  }, [buttonRef]);
+    if (buttonRef.current) new MDCRipple(buttonRef.current)
+  }, [buttonRef])
 
   return (
     <button
-      data-testid="result-input"
-      className={`mdc-button mdc-button--outlined ${gridArea} ${styles.keypadButton}`}
-      style={{ gridArea: gridArea }}
+      className={`mdc-button mdc-button--${variant} ${styles.keypadButton}`}
+      data-testid={testid}
+      onClick={() => { onClick?.() }}
       ref={buttonRef}
+      style={{ gridArea: gridArea }}
     >
       <span className="mdc-button__ripple"></span>
       <span className="mdc-button__label">{children}</span>
     </button>
-  );
+  )
 }
