@@ -42,4 +42,11 @@ class AdditionStepDefinitions {
       EnterOnTheKeypad.the4Button
     )
   }
+
+  @When("{actor} enters equal on the keypad")
+  fun `enters equal`(actor: Actor) {
+    actor.attemptsTo(
+      EnterOnTheKeypad.theEqualButton
+    )
+  }
 }

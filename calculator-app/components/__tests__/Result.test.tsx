@@ -12,4 +12,17 @@ describe('Result', () => {
 
     expect(component?.toJSON()).toMatchSnapshot()
   })
+
+  test('update value', () => {
+    let component: ReactTestRenderer | undefined
+    act(() => {
+      component = renderer.create(<Result value="42" />)
+    })
+
+    act(() => {
+      component?.update(<Result value="69" />)
+    })
+
+    expect(component?.toJSON()).toMatchSnapshot()
+  })
 })

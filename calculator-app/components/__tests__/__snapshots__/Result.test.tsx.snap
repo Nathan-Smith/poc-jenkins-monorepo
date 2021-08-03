@@ -8,3 +8,12 @@ exports[`Result renders 1`] = `
   42
 </div>
 `;
+
+exports[`Result update value 1`] = `
+<div
+  className="result result"
+  data-testid="result"
+>
+  69
+</div>
+`;

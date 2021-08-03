@@ -18,4 +18,9 @@ object EnterOnTheKeypad {
     "{0} enters add on the keypad",
     Click.on(Keypad.BUTTON_ADD)
   )
+
+  val theEqualButton = Task.where(
+    "{0} enters equal on the keypad",
+    Click.on(Keypad.BUTTON_EQUAL)
+  )
 }

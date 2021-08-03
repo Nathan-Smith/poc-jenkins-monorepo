@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { useState } from 'react'
+
 import styles from '../styles/Home.module.scss'
 import { KeypadDecimal } from "../components/KeypadDecimal"
 import { Keypad0 } from "../components/Keypad0"
@@ -16,6 +18,8 @@ import { KeypadEqual } from '../components/KeypadEqual'
 import { Result } from '../components/Result'
 
 export default function Home(): JSX.Element {
+  const [result, setResult] = useState('42')
+
   return (
     <>
       <Head>
@@ -25,9 +29,9 @@ export default function Home(): JSX.Element {
       </Head>
 
       <main className={styles.main}>
-        <Result value="42" />
+        <Result value={result} />
         <Keypad1 />
-        <Keypad2 />
+        <Keypad2 onClick={setResult} />
         <Keypad3 />
         <Keypad4 />
         <Keypad5 />
