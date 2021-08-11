@@ -2,7 +2,7 @@
 
 exports[`KeypadEqual renders 1`] = `
 <button
-  className="mdc-button mdc-button--raised keypadButton"
+  className="mdc-button mdc-button--outlined keypadButton"
   data-testid="keypad-equal"
   onClick={[Function]}
   style={

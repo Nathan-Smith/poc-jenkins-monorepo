@@ -14,12 +14,12 @@ describe('Keypad2', () => {
     expect(component?.toJSON()).toMatchSnapshot()
   })
 
-  test('renders', () => {
-    const onClick = jest.fn()
-    const { getByTestId } = render(<Keypad2 onClick={onClick} />)
+  test('calls onInput with 2 on click', () => {
+    const onInput = jest.fn()
+    const { getByTestId } = render(<Keypad2 onInput={onInput} />)
 
     fireEvent.click(getByTestId(/keypad-2/i))
 
-    expect(onClick).toBeCalledWith('2')
+    expect(onInput).toBeCalledWith('2')
   })
 })

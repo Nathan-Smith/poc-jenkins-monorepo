@@ -1,16 +1,16 @@
 import { KeypadButton } from './KeypadButton'
 
 export function Keypad2({
-  onClick,
+  onInput,
 }: {
-  onClick?: (op: string) => void
+  onInput?: (op: string) => void
 }): JSX.Element {
   return (
     <KeypadButton
       testid="keypad-2"
       gridArea="keypad-2"
       onClick={() => {
-        onClick?.('2')
+        onInput?.('2')
       }}
     >
       2

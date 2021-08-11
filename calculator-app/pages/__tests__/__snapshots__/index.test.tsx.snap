@@ -8,7 +8,7 @@ exports[`index renders 1`] = `
     className="result result"
     data-testid="result"
   >
-    42
+    6
   </div>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
@@ -183,25 +183,6 @@ exports[`index renders 1`] = `
   </button>
   <button
     className="mdc-button mdc-button--outlined keypadButton"
-    data-testid="keypad-decimal"
-    onClick={[Function]}
-    style={
-      Object {
-        "gridArea": "keypad-decimal",
-      }
-    }
-  >
-    <span
-      className="mdc-button__ripple"
-    />
-    <span
-      className="mdc-button__label"
-    >
-      .
-    </span>
-  </button>
-  <button
-    className="mdc-button mdc-button--outlined keypadButton"
     data-testid="keypad-0"
     onClick={[Function]}
     style={
@@ -217,6 +198,25 @@ exports[`index renders 1`] = `
       className="mdc-button__label"
     >
       0
+    </span>
+  </button>
+  <button
+    className="mdc-button mdc-button--outlined keypadButton"
+    data-testid="keypad-decimal"
+    onClick={[Function]}
+    style={
+      Object {
+        "gridArea": "keypad-decimal",
+      }
+    }
+  >
+    <span
+      className="mdc-button__ripple"
+    />
+    <span
+      className="mdc-button__label"
+    >
+      .
     </span>
   </button>
   <button
@@ -239,7 +239,7 @@ exports[`index renders 1`] = `
     </span>
   </button>
   <button
-    className="mdc-button mdc-button--raised keypadButton"
+    className="mdc-button mdc-button--outlined keypadButton"
     data-testid="keypad-equal"
     onClick={[Function]}
     style={

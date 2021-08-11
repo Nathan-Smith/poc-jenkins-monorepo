@@ -1,11 +1,17 @@
-import { KeypadButton, MDCButtonVariant } from './KeypadButton'
+import { KeypadButton } from './KeypadButton'
 
-export function KeypadEqual(): JSX.Element {
+export function KeypadEqual({
+  onInput,
+}: {
+  onInput?: () => void
+}): JSX.Element {
   return (
     <KeypadButton
       testid="keypad-equal"
       gridArea="keypad-equal"
-      variant={MDCButtonVariant.raised}
+      onClick={() => {
+        onInput?.()
+      }}
     >
       =
     </KeypadButton>

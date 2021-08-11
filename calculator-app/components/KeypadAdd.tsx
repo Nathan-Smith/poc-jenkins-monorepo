@@ -1,8 +1,18 @@
 import { KeypadButton } from './KeypadButton'
 
-export function KeypadAdd(): JSX.Element {
+export function KeypadAdd({
+  onInput,
+}: {
+  onInput?: (op: string) => void
+}): JSX.Element {
   return (
-    <KeypadButton testid="keypad-add" gridArea="keypad-add">
+    <KeypadButton
+      testid="keypad-add"
+      gridArea="keypad-add"
+      onClick={() => {
+        onInput?.('add')
+      }}
+    >
       +
     </KeypadButton>
   )
