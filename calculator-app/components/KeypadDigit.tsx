@@ -1,19 +1,21 @@
 import { KeypadButton } from './KeypadButton'
 
-export function Keypad2({
+export function KeypadDigit({
+  digit,
   onInput,
 }: {
+  digit: string
   onInput?: (op: string) => void
 }): JSX.Element {
   return (
     <KeypadButton
-      testid="keypad-2"
-      gridArea="keypad-2"
+      testid={`keypad-${digit}`}
+      gridArea={`keypad-${digit}}`}
       onClick={() => {
-        onInput?.('2')
+        onInput?.(digit)
       }}
     >
-      2
+      {digit}
     </KeypadButton>
   )
 }

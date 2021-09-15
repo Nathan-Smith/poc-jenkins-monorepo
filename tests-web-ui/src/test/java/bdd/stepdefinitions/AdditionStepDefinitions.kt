@@ -15,10 +15,10 @@ class AdditionStepDefinitions {
     actor.wasAbleTo(NavigateTo.theCalculatorPage)
   }
 
-  @When("{actor} enters 2 on the keypad")
-  fun `enters 2`(actor: Actor) {
+  @When("{actor} enters {int} on the keypad")
+  fun `enters digit`(actor: Actor, digit: Int) {
     actor.attemptsTo(
-      EnterOnTheKeypad.the2Button
+      EnterOnTheKeypad.the(digit).button
     )
   }
 
@@ -33,13 +33,6 @@ class AdditionStepDefinitions {
   fun `enters add`(actor: Actor) {
     actor.attemptsTo(
       EnterOnTheKeypad.theAddButton
-    )
-  }
-
-  @When("{actor} enters 4 on the keypad")
-  fun `enters 4`(actor: Actor) {
-    actor.attemptsTo(
-      EnterOnTheKeypad.the4Button
     )
   }
 
