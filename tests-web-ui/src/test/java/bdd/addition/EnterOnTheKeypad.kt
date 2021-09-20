@@ -8,7 +8,7 @@ object EnterOnTheKeypad {
   data class DigitButton(val button: Task)
 
   fun the(digit: Int) = DigitButton(button = Task.where(
-    "{0} enters $digit on the keypad",
+    "{0} enter $digit on the keypad",
     Click.on(when (digit) {
       0 -> Keypad.BUTTON_0
       1 -> Keypad.BUTTON_1
@@ -24,23 +24,13 @@ object EnterOnTheKeypad {
     })
   ))
 
-  val the2Button: Task = Task.where(
-    "{0} enters 2 on the keypad",
-    Click.on(Keypad.BUTTON_2)
-  )
-
-  val the4Button: Task = Task.where(
-    "{0} enters 4 on the keypad",
-    Click.on(Keypad.BUTTON_4)
-  )
-
   val theAddButton: Task = Task.where(
-    "{0} enters add on the keypad",
+    "{0} enter add on the keypad",
     Click.on(Keypad.BUTTON_ADD)
   )
 
   val theEqualButton = Task.where(
-    "{0} enters equal on the keypad",
+    "{0} enter equal on the keypad",
     Click.on(Keypad.BUTTON_EQUAL)
   )
 }

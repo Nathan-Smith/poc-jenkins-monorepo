@@ -3,7 +3,7 @@ COMPOSE_BUILD_TEST = docker-compose build test
 COMPOSE_RUN_DEV = $(COMPOSE_BUILD_DEV) && docker-compose run $(2) --rm dev $(1)
 COMPOSE_RUN_TEST = $(COMPOSE_BUILD_TEST); docker-compose run --rm $(2) test /bin/bash -c "$(SETUP_TESTS) && $(1); $(TEARDOWN_TESTS)"
 SETUP_TESTS = rsync -a \$$WORKING_DIR/ /opt/app --exclude node_modules --exclude package.json --exclude package-lock.json && cd /opt/app
-TEARDOWN_TESTS = rsync -a /opt/app/ \$$WORKING_DIR --exclude node_modules --exclude package.json --exclude package-lock.json
+TEARDOWN_TESTS = rsync -a /opt/app/ \$$WORKING_DIR --exclude node_modules --exclude package.json --exclude package-lock.json --delete
 
 VERSION :=$(file < VERSION)
 IMAGE_TAG :=docker-repository-127-0-0-1.nip.io/calculator-app:$(VERSION)

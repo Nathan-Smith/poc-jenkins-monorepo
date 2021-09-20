@@ -10,7 +10,7 @@ export function KeypadDigit({
   return (
     <KeypadButton
       testid={`keypad-${digit}`}
-      gridArea={`keypad-${digit}}`}
+      gridArea={`keypad-${digit}`}
       onClick={() => {
         onInput?.(digit)
       }}

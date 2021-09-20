@@ -1,12 +1,19 @@
 import { renderHook, act } from '@testing-library/react-hooks'
+import { setupServer } from 'msw/node'
 
 import useResult from '../useResult'
+
+const server = setupServer()
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
 
 describe('useResult', () => {
   test('initial result', () => {
     const { result } = renderHook(() => useResult())
 
-    expect(result.current.result).toBe('42')
+    expect(result.current.result).toBe('0')
   })
 
   test('addInput 2', () => {
@@ -26,7 +33,7 @@ describe('useResult', () => {
       result.current.addInput('add')
     })
 
-    expect(result.current.result).toBe('42')
+    expect(result.current.result).toBe('0')
   })
 
   test('calculate 6', () => {
@@ -46,6 +53,32 @@ describe('useResult', () => {
     })
 
     expect(result.current.result).toBe('6')
+  })
+
+  test('addInput 1 and  0', () => {
+    const { result } = renderHook(() => useResult())
+
+    act(() => {
+      result.current.addInput('1')
+    })
+    act(() => {
+      result.current.addInput('0')
+    })
+
+    expect(result.current.result).toBe('10')
+  })
+
+  test('addInput 0 and  0', () => {
+    const { result } = renderHook(() => useResult())
+
+    act(() => {
+      result.current.addInput('0')
+    })
+    act(() => {
+      result.current.addInput('0')
+    })
+
+    expect(result.current.result).toBe('0')
   })
 
   // test.each`
