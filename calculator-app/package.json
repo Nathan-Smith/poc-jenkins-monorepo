@@ -43,6 +43,7 @@
     "jest": "27.2.0",
     "lodash": "4.17.21",
     "msw": "0.35.0",
+    "node-mocks-http": "1.10.1",
     "prettier": "2.4.0",
     "react-test-renderer": "17.0.2",
     "sass": "1.41.0",
