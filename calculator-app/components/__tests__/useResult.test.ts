@@ -1,9 +1,14 @@
 import { renderHook, act } from '@testing-library/react-hooks'
+import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
 import useResult from '../useResult'
 
-const server = setupServer()
+const server = setupServer(
+  rest.post('http://localhost/api/calculate', (req, res, ctx) => {
+    return res(ctx.json('6'))
+  })
+)
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }))
 afterEach(() => server.resetHandlers())
@@ -36,7 +41,7 @@ describe('useResult', () => {
     expect(result.current.result).toBe('0')
   })
 
-  test('calculate 6', () => {
+  test('calculate 6', async () => {
     const { result } = renderHook(() => useResult())
 
     act(() => {
@@ -48,8 +53,8 @@ describe('useResult', () => {
     act(() => {
       result.current.addInput('4')
     })
-    act(() => {
-      result.current.calculate()
+    await act(async () => {
+      await result.current.calculate()
     })
 
     expect(result.current.result).toBe('6')

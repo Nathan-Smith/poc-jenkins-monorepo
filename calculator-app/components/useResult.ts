@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useState } from 'react'
 import { last, trimStart } from 'lodash'
 
@@ -11,13 +12,8 @@ export default function useResult(): UseResult {
   const [inputs, setInputs] = useState<string[]>([])
   const [result, setResult] = useState<string>('0')
 
-  function calculate() {
-    fetch('/api/calculate', {
-      method: 'POST',
-      body: JSON.stringify({ inputs }),
-    })
-      .then((res) => res.json())
-      .then(setResult)
+  async function calculate() {
+    setResult((await axios.post('/api/calculate', { inputs })).data)
   }
 
   function addInput(input: string) {
