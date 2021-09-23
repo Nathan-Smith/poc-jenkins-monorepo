@@ -1,0 +1,58 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0-dev.0
+  title: Rest API
+  description: API for Calculator App
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: http://localhost/api
+paths:
+  /add:
+    post:
+      summary: Add
+      operationId: add
+      tags:
+        - internal
+      description: Adds two numbers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                  type: string
+              example: ['2', '4']
+      responses:
+        200:
+          description: Result
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '6'
+  /calculate:
+    post:
+      summary: Calculate Input
+      operationId: calculateInput
+      tags:
+        - public
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                inputs:
+                  type: array
+                  items:
+                    type: string
+                  example: ['2', 'add', '4']
+      responses:
+        200:
+          description: Calculation
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "6"

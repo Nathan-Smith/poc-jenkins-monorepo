@@ -1,0 +1,7 @@
+stage('rest-api') {
+  steps {
+    dir('rest-api') {
+      sh 'make ci'
+    }
+  }
+}
